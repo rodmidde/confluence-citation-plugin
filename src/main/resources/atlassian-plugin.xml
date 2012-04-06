@@ -1,0 +1,18 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+    </plugin-info>
+
+    <macro name="citation" class="nl.mdlware.confluence.plugins.bibliography.CitationMacro" key="citation-macro">
+        <parameters>
+            <parameter name="url" type="string" required="true"/>
+            <parameter name="nameOfPage" type="string" required="true" />
+            <parameter name="nameOfSite" type="string" required="true" />
+            <parameter name="referenceDate" type="date" required="true"/>
+            <parameter name="author" type="string" />
+            <parameter name="publicationDate" type="date" />
+        </parameters>
+    </macro>
+</atlassian-plugin>
