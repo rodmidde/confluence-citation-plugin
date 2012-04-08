@@ -1,8 +1,7 @@
 package nl.mdlware.confluence.plugins.bibliography;
 
+import nl.mdlware.confluence.plugins.citation.Citation;
 import org.junit.Test;
-
-import java.util.Calendar;
 
 /**
  * Description for the class CitationTest:

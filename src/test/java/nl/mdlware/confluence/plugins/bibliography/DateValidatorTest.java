@@ -1,6 +1,6 @@
 package nl.mdlware.confluence.plugins.bibliography;
 
-import org.junit.Before;
+import nl.mdlware.confluence.plugins.citation.DateValidator;
 import org.junit.Test;
 
 import java.lang.reflect.Constructor;

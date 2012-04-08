@@ -1,5 +1,7 @@
 package nl.mdlware.confluence.plugins.bibliography;
 
+import nl.mdlware.confluence.plugins.citation.Citation;
+import nl.mdlware.confluence.plugins.citation.RenderedCitation;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

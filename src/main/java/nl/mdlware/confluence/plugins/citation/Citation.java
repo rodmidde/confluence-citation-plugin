@@ -1,7 +1,4 @@
-package nl.mdlware.confluence.plugins.bibliography;
-
-import static nl.mdlware.confluence.plugins.bibliography.DateValidator.*;
-import static nl.mdlware.confluence.plugins.bibliography.Validator.*;
+package nl.mdlware.confluence.plugins.citation;
 
 /**
  * Description for the class Citation:
@@ -27,12 +24,12 @@ public class Citation {
     }
 
     private void validate() {
-        if (!isSet(url)) throw new IllegalArgumentException("Empty URL");
-        if (!isSet(nameOfPage)) throw new IllegalArgumentException("Empty Pagename");
-        if (!isSet(nameOfSite)) throw new IllegalArgumentException("Empty Sitename");
-        if (!isSet(referenceDate)) throw new IllegalArgumentException("Empty Referencedate");
-        if (!isValidDate(referenceDate)) throw new IllegalArgumentException("Invalid Referencedate");
-        if (this.publicationDate != null && !isValidDate(this.publicationDate))
+        if (!Validator.isSet(url)) throw new IllegalArgumentException("Empty URL");
+        if (!Validator.isSet(nameOfPage)) throw new IllegalArgumentException("Empty Pagename");
+        if (!Validator.isSet(nameOfSite)) throw new IllegalArgumentException("Empty Sitename");
+        if (!Validator.isSet(referenceDate)) throw new IllegalArgumentException("Empty Referencedate");
+        if (!DateValidator.isValidDate(referenceDate)) throw new IllegalArgumentException("Invalid Referencedate");
+        if (this.publicationDate != null && !DateValidator.isValidDate(this.publicationDate))
             throw new IllegalArgumentException("Invalid Publicationdate");
     }
 
@@ -47,14 +44,22 @@ public class Citation {
     public String getReferenceDate() {
         return referenceDate;
     }
-    
-    public String getPublicationDate()
-    {
+
+    public String getPublicationDate() {
         return publicationDate;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getNameOfPage() {
+        return nameOfPage;
     }
 
     // required
     private String url;
+
     private String nameOfPage;
     private String nameOfSite;
     private String referenceDate;

@@ -5,8 +5,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>nl.mdlware.confluence.plugins.bibliography</groupId>
-    <artifactId>confluence-bibliography-plugin</artifactId>
+    <groupId>nl.mdlware.confluence.plugins.citation</groupId>
+    <artifactId>confluence-citation-plugin</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <organization>
@@ -14,8 +14,20 @@
         <url>http://www.mdlware.nl/</url>
     </organization>
 
-    <name>confluence-bibliography-plugin</name>
-    <description>This is the nl.mdlware.confluence.plugins.bibliography:confluence-bibliography-plugin plugin for Atlassian Confluence.</description>
+    <developers>
+        <developer>
+            <name>Rody Middelkoop</name>
+            <email>info@mdlware.nl</email>
+            <organization>Mdlware</organization>
+            <organizationUrl>http://www.mdlware.nl</organizationUrl>
+        </developer>
+    </developers>
+
+
+    <name>confluence-citation-plugin</name>
+    <description>This is the nl.mdlware.confluence.plugins.citation:confluence-citation-plugin plugin for Atlassian
+        Confluence.
+    </description>
     <packaging>atlassian-plugin</packaging>
 
     <dependencies>
@@ -80,8 +92,8 @@
     </build>
 
     <properties>
-        <confluence.version>3.4.7</confluence.version>
-        <confluence.data.version>3.1</confluence.data.version>
+        <confluence.version>4.2</confluence.version>
+        <confluence.data.version>4.2</confluence.data.version>
     </properties>
 
 </project>

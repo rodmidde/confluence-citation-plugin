@@ -1,6 +1,4 @@
-package nl.mdlware.confluence.plugins.bibliography;
-
-import static nl.mdlware.confluence.plugins.bibliography.Validator.isSet;
+package nl.mdlware.confluence.plugins.citation;
 
 /**
  * Description for the class RenderedCitation:
@@ -24,8 +22,8 @@ public class RenderedCitation {
     }
 
     private String getYear() {
-        if (isSet(citation.getPublicationDate())) return split(citation.getPublicationDate());
-        if (isSet(citation.getReferenceDate())) return split(citation.getReferenceDate());
+        if (Validator.isSet(citation.getPublicationDate())) return split(citation.getPublicationDate());
+        if (Validator.isSet(citation.getReferenceDate())) return split(citation.getReferenceDate());
         return null;
     }
 
@@ -34,8 +32,8 @@ public class RenderedCitation {
     }
 
     private String shorten() {
-        if (isSet(citation.getAuthor())) return shorten(citation.getAuthor());
-        if (isSet(citation.getNameOfSite())) return shorten(citation.getNameOfSite());
+        if (Validator.isSet(citation.getAuthor())) return shorten(citation.getAuthor());
+        if (Validator.isSet(citation.getNameOfSite())) return shorten(citation.getNameOfSite());
         return null;
     }
 

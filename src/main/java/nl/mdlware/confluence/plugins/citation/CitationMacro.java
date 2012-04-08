@@ -1,4 +1,4 @@
-package nl.mdlware.confluence.plugins.bibliography;
+package nl.mdlware.confluence.plugins.citation;
 
 import com.atlassian.confluence.pages.PageManager;
 import com.atlassian.confluence.spaces.SpaceManager;
@@ -40,21 +40,13 @@ public class CitationMacro extends BaseMacro {
         Citation citation = null;
         if (params == null || params.isEmpty()) throw new MacroException("Empty parameterlist");
         try {
-            citation = new Citation(
-                    getPropAsString(params, "url"),
-                    getPropAsString(params, "author"),
-                    getPropAsString(params, "referenceDate"),
-                    getPropAsString(params, "publicationDate"),
-                    getPropAsString(params, "nameOfPage"),
-                    getPropAsString(params, "nameOfSite"));
+            citation = new CitationFactory().createCitationFromMap(params);
         } catch (IllegalArgumentException iae) {
             throw new MacroException(iae);
         }
         return citation;
     }
 
-    private String getPropAsString(Map params, String propName) {
-        return (String) params.get(propName);
-    }
+
 
 }

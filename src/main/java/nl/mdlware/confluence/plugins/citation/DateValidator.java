@@ -1,4 +1,4 @@
-package nl.mdlware.confluence.plugins.bibliography;
+package nl.mdlware.confluence.plugins.citation;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

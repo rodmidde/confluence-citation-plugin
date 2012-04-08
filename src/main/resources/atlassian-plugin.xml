@@ -2,17 +2,31 @@
     <plugin-info>
         <description>${project.description}</description>
         <version>${project.version}</version>
-        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
     </plugin-info>
 
-    <macro name="citation" class="nl.mdlware.confluence.plugins.bibliography.CitationMacro" key="citation-macro">
+    <resource type="download" name="images/" location="images"/>
+    <resource type="i18n" name="i18n" location="/i18n/citation"/>
+
+    <macro name="citation" class="nl.mdlware.confluence.plugins.citation.CitationMacro" key="citation-macro"
+           icon="/download/resources/nl.mdlware.confluence.plugins.citation.confluence-citation-plugin/images/citation.png"
+           documentation-url="https://github.com/rodmidde/confluence-citation-plugin/wiki">
         <parameters>
             <parameter name="url" type="string" required="true"/>
-            <parameter name="nameOfPage" type="string" required="true" />
-            <parameter name="nameOfSite" type="string" required="true" />
+            <parameter name="nameOfPage" type="string" required="true"/>
+            <parameter name="nameOfSite" type="string" required="true"/>
             <parameter name="referenceDate" type="date" required="true"/>
-            <parameter name="author" type="string" />
-            <parameter name="publicationDate" type="date" />
+            <parameter name="author" type="string"/>
+            <parameter name="publicationDate" type="date"/>
+        </parameters>
+        <category>reporting</category>
+    </macro>
+    <macro name="bibliography" class="nl.mdlware.confluence.plugins.citation.BibliographyMacro" key="bibliography-macro"
+           icon="/download/resources/nl.mdlware.confluence.plugins.citation.confluence-citation-plugin/images/bibliography.png"
+           documentation-url="https://github.com/rodmidde/confluence-citation-plugin/wiki">
+        <parameters>
+            <parameter name="spaceName" type="spacekey" required="true"/>
+            <category>reporting</category>
         </parameters>
     </macro>
 </atlassian-plugin>

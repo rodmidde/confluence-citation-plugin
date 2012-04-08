@@ -1,4 +1,4 @@
-package nl.mdlware.confluence.plugins.bibliography;
+package nl.mdlware.confluence.plugins.citation;
 
 /**
  * Description for the class Validator:
@@ -13,7 +13,7 @@ package nl.mdlware.confluence.plugins.bibliography;
  * @version Copyright (c) 2012 HAN University, All rights reserved.
  */
 public class Validator {
-    static boolean isSet(Object field) {
+    public static boolean isSet(Object field) {
         return field != null && !"".equals(field);
     }
 }
