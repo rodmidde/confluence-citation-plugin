@@ -13,14 +13,6 @@ import java.util.Map;
  * @author Rody Middelkoop
  */
 public class CitationMacro extends BaseMacro {
-    private final PageManager pageManager;
-    private final SpaceManager spaceManager;
-
-    public CitationMacro(PageManager pageManager, SpaceManager spaceManager) {
-        this.pageManager = pageManager;
-        this.spaceManager = spaceManager;
-    }
-
     public boolean hasBody() {
         return false;
     }
@@ -37,7 +29,7 @@ public class CitationMacro extends BaseMacro {
     }
 
     private Citation createCitation(Map params) throws MacroException {
-        Citation citation = null;
+        Citation citation;
         if (params == null || params.isEmpty()) throw new MacroException("Empty parameterlist");
         try {
             citation = new CitationFactory().createCitationFromMap(params);

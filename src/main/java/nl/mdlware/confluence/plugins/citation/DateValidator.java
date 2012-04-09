@@ -16,7 +16,7 @@ import java.util.Date;
  * @author mdkr
  * @version Copyright (c) 2012 HAN University, All rights reserved.
  */
-public class DateValidator {
+class DateValidator {
     private DateValidator() {
     }
 

@@ -16,7 +16,7 @@ import java.util.Map;
  * @author mdkr
  * @version Copyright (c) 2012 HAN University, All rights reserved.
  */
-public class CitationFactory {
+class CitationFactory {
     public Citation createCitationFromMap(Map params)
     {
         return new Citation(

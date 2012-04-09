@@ -53,12 +53,16 @@ public class BibliographyMacro extends BaseMacro {
     }
 
     private void renderPageCitations(StringWriter stringWriter, List<Page> pageList) {
+        renderCitations(stringWriter, getSortedCitations(pageList));
+    }
+
+    private List<Citation> getSortedCitations(List<Page> pageList) {
         List<Citation> citations = new ArrayList<Citation>();
         for (Page page : pageList) {
-             citations.addAll(getCitations(page));
+            citations.addAll(getCitations(page));
         }
         Collections.sort(citations);
-        renderCitations(stringWriter, citations);
+        return citations;
     }
 
     private void renderCitations(StringWriter stringWriter, List<Citation> citations) {
@@ -68,28 +72,12 @@ public class BibliographyMacro extends BaseMacro {
             stringWriter.append(contents);
             stringWriter.append("]</a> ");
             stringWriter.append(new RenderedBibliographyItem(citation).render());
+            stringWriter.append("<br>");
         }
     }
 
     private List<Citation> getCitations(Page page) {
-        List<Citation> citations = new ArrayList<Citation>();
-        if (page.getTitle().equals("Home")) {
-            Map params = createDefaultMap();
-            Citation citation = new CitationFactory().createCitationFromMap(params);
-            citations.add(citation);
-        }
-        return citations;
+        CitationExtractor citationExtractor = new CitationExtractor(page.getBodyAsString());
+        return citationExtractor.extract();
     }
-
-    private Map createDefaultMap() {
-        Map params = new HashMap();
-        params.put("url", "http://www.han.nl/ica");
-        params.put("nameOfPage", "ICA");
-        params.put("nameOfSite", "HAN");
-        params.put("referenceDate", "12-12-2000");
-        params.put("author", "Rody Middelkoop");
-        params.put("publicationDate", "1-1-1999");
-        return params;
-    }
-
 }

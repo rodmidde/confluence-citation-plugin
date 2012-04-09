@@ -16,8 +16,8 @@ import static nl.mdlware.confluence.plugins.citation.Validator.isSet;
  * @author mdkr
  * @version Copyright (c) 2012 HAN University, All rights reserved.
  */
-public class RenderedBibliographyItem  {
-    private Citation citation;
+class RenderedBibliographyItem  {
+    private final Citation citation;
 
     public RenderedBibliographyItem(Citation citation) {
         this.citation = citation;
@@ -34,7 +34,7 @@ public class RenderedBibliographyItem  {
         }
         if (isSet(citation.getNameOfPage()))
         {
-            stringWriter.append(citation.getNameOfPage() + ". ");
+            stringWriter.append(citation.getNameOfPage()).append(". ");
         }
         stringWriter.append("Retrieved " + citation.getReferenceDate() + ", ");
         stringWriter.append("from " + citation.getNameOfSite() + ": ");

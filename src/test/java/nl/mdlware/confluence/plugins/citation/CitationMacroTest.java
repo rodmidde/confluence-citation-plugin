@@ -23,7 +23,7 @@ public class CitationMacroTest {
 
     @Before
     public void setUp() throws Exception {
-        macro = new CitationMacro(mock(PageManager.class), mock(SpaceManager.class));
+        macro = new CitationMacro();
     }
 
     @Test

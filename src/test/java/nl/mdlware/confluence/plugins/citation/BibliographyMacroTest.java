@@ -56,14 +56,21 @@ public class BibliographyMacroTest {
     @Test
     public void testExecuteForMoreThanZeroPagesContainingOneCitation() throws MacroException {
         BibliographyMacro bibliographyMacro = createBibliographyMacro(createFilledListOfPagesWithOneCitation());
-        assertEquals("<h1>Bibliography</h1><a name='MID-1999'>[MID-1999]</a> Rody Middelkoop (1-1-1999). ICA. Retrieved 12-12-2000, from HAN: <a href='http://www.han.nl/ica'>http://www.han.nl/ica</a>", bibliographyMacro.execute(getRequiredParams(), null, null));
+        assertEquals("<h1>Bibliography</h1><a name='MID-1999'>[MID-1999]</a> Rody Middelkoop (1-1-1999). ICA. Retrieved 12-12-2000, from HAN: <a href='http://www.han.nl/ica'>http://www.han.nl/ica</a><br>", bibliographyMacro.execute(getRequiredParams(), null, null));
     }
 
     private List<Page> createFilledListOfPagesWithOneCitation() {
         List<Page> pageList = createFilledListOfPages();
         Page page = pageList.get(0);
         page.setTitle("Home");
-        page.setBodyAsString("{citation:url=http://www.han.nl|nameOfPage=ICA|nameOfSite=HAN|referenceDate=12-12-2000|author=Rody Middelkoop|publicationDate=1-1-1999}");
+        page.setBodyAsString("<ac:macro ac:name=\"citation\">\n" +
+                "        <ac:parameter ac:name=\"referenceDate\">12-12-2000</ac:parameter>\n" +
+                "        <ac:parameter ac:name=\"nameOfPage\">ICA</ac:parameter>\n" +
+                "        <ac:parameter ac:name=\"author\">Rody Middelkoop</ac:parameter>\n" +
+                "        <ac:parameter ac:name=\"nameOfSite\">HAN</ac:parameter>\n" +
+                "        <ac:parameter ac:name=\"url\">http://www.han.nl/ica</ac:parameter>\n" +
+                "        <ac:parameter ac:name=\"publicationDate\">1-1-1999</ac:parameter>\n" +
+                "    </ac:macro>");
         return pageList;
     }
 

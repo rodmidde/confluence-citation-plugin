@@ -60,14 +60,14 @@ public class Citation implements Comparable<Citation>{
     }
 
     // required
-    private String url;
-    private String nameOfPage;
-    private String nameOfSite;
-    private String referenceDate;
+    private final String url;
+    private final String nameOfPage;
+    private final String nameOfSite;
+    private final String referenceDate;
 
     //optional
-    private String author;
-    private String publicationDate;
+    private final String author;
+    private final String publicationDate;
 
     public int compareTo(Citation citation) {
         RenderedCitation renderedCitation = new RenderedCitation(this);

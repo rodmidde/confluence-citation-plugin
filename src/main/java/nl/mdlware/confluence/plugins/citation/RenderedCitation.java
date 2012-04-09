@@ -12,7 +12,7 @@ package nl.mdlware.confluence.plugins.citation;
  * @author mdkr
  * @version Copyright (c) 2012 HAN University, All rights reserved.
  */
-public class RenderedCitation {
+class RenderedCitation {
     public RenderedCitation(Citation citation) {
         this.citation = citation;
     }
@@ -44,5 +44,5 @@ public class RenderedCitation {
     }
 
     private static final int SHORTVAL = 3;
-    private Citation citation;
+    private final Citation citation;
 }
