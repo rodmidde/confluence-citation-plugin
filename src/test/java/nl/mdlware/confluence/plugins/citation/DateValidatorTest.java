@@ -1,4 +1,4 @@
-package nl.mdlware.confluence.plugins.bibliography;
+package nl.mdlware.confluence.plugins.citation;
 
 import nl.mdlware.confluence.plugins.citation.DateValidator;
 import org.junit.Test;

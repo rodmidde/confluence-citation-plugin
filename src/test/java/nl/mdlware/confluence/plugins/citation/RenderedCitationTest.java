@@ -1,4 +1,4 @@
-package nl.mdlware.confluence.plugins.bibliography;
+package nl.mdlware.confluence.plugins.citation;
 
 import nl.mdlware.confluence.plugins.citation.Citation;
 import nl.mdlware.confluence.plugins.citation.RenderedCitation;

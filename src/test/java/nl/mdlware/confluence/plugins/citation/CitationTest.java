@@ -1,7 +1,10 @@
-package nl.mdlware.confluence.plugins.bibliography;
+package nl.mdlware.confluence.plugins.citation;
 
 import nl.mdlware.confluence.plugins.citation.Citation;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Description for the class CitationTest:
@@ -63,6 +66,17 @@ public class CitationTest {
     @Test(expected = IllegalArgumentException.class)
     public void testCreateCitationWithNullSitename() {
         new Citation("url", "author", "somedate", "somedate", "page", null);
+    }
+
+    @Test
+    public void testCompareTo()
+    {
+        Citation citation = new Citation("http://www.han.nl","Rody Middelkoop", "12-12-2000", "1-1-1999", "ICA", "HAN");
+        Citation copyCitation = new Citation("http://www.han.nl","Rody Middelkoop", "12-12-2000", "1-1-1999", "ICA", "HAN");
+        Citation citationWithoutAuthor = new Citation("http://www.han.nl","", "12-12-2000", "1-1-1999", "ICA", "HAN");
+        assertEquals(0, citation.compareTo(copyCitation));
+        assertTrue(citationWithoutAuthor.compareTo(citation) <= -1);
+
     }
 
 }

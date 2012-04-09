@@ -9,10 +9,7 @@ import com.atlassian.renderer.v2.macro.BaseMacro;
 import com.atlassian.renderer.v2.macro.MacroException;
 
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Rody Middelkoop
@@ -56,16 +53,20 @@ public class BibliographyMacro extends BaseMacro {
     }
 
     private void renderPageCitations(StringWriter stringWriter, List<Page> pageList) {
+        List<Citation> citations = new ArrayList<Citation>();
         for (Page page : pageList) {
-            renderCitations(stringWriter, getCitations(page));
+             citations.addAll(getCitations(page));
         }
+        Collections.sort(citations);
+        renderCitations(stringWriter, citations);
     }
 
     private void renderCitations(StringWriter stringWriter, List<Citation> citations) {
         for (Citation citation : citations) {
-            stringWriter.append("[");
-            stringWriter.append(new RenderedCitation(citation).render());
-            stringWriter.append("] ");
+            String contents = new RenderedCitation(citation).render();
+            stringWriter.append("<a name='" + contents + "'>[");
+            stringWriter.append(contents);
+            stringWriter.append("]</a> ");
             stringWriter.append(new RenderedBibliographyItem(citation).render());
         }
     }

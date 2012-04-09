@@ -1,5 +1,7 @@
 package nl.mdlware.confluence.plugins.citation;
 
+import static nl.mdlware.confluence.plugins.citation.Validator.isSet;
+
 /**
  * Description for the class Citation:
  * <p/>
@@ -12,7 +14,7 @@ package nl.mdlware.confluence.plugins.citation;
  * @author mdkr
  * @version Copyright (c) 2012 HAN University, All rights reserved.
  */
-public class Citation {
+public class Citation implements Comparable<Citation>{
     public Citation(String url, String author, String referenceDate, String publicationDate, String nameOfPage, String nameOfSite) {
         this.url = url;
         this.author = author;
@@ -59,7 +61,6 @@ public class Citation {
 
     // required
     private String url;
-
     private String nameOfPage;
     private String nameOfSite;
     private String referenceDate;
@@ -67,4 +68,10 @@ public class Citation {
     //optional
     private String author;
     private String publicationDate;
+
+    public int compareTo(Citation citation) {
+        RenderedCitation renderedCitation = new RenderedCitation(this);
+        RenderedCitation otherRenderedCitation = new RenderedCitation(citation);
+        return renderedCitation.render().compareTo(otherRenderedCitation.render());
+    }
 }

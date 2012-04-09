@@ -38,7 +38,7 @@ public class RenderedBibliographyItem  {
         }
         stringWriter.append("Retrieved " + citation.getReferenceDate() + ", ");
         stringWriter.append("from " + citation.getNameOfSite() + ": ");
-        stringWriter.append(citation.getUrl());
+        stringWriter.append("<a href='" + citation.getUrl() + "'>" + citation.getUrl() + "</a>");
         return stringWriter.toString();
     }
 }

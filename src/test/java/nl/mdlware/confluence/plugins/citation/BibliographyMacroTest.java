@@ -1,4 +1,4 @@
-package nl.mdlware.confluence.plugins.bibliography;
+package nl.mdlware.confluence.plugins.citation;
 
 import com.atlassian.confluence.pages.Page;
 import com.atlassian.confluence.pages.PageManager;
@@ -56,7 +56,7 @@ public class BibliographyMacroTest {
     @Test
     public void testExecuteForMoreThanZeroPagesContainingOneCitation() throws MacroException {
         BibliographyMacro bibliographyMacro = createBibliographyMacro(createFilledListOfPagesWithOneCitation());
-        assertEquals("<h1>Bibliography</h1>[MID-1999] Rody Middelkoop (1-1-1999). ICA. Retrieved 12-12-2000, from HAN: http://www.han.nl/ica", bibliographyMacro.execute(getRequiredParams(), null, null));
+        assertEquals("<h1>Bibliography</h1><a name='MID-1999'>[MID-1999]</a> Rody Middelkoop (1-1-1999). ICA. Retrieved 12-12-2000, from HAN: <a href='http://www.han.nl/ica'>http://www.han.nl/ica</a>", bibliographyMacro.execute(getRequiredParams(), null, null));
     }
 
     private List<Page> createFilledListOfPagesWithOneCitation() {
