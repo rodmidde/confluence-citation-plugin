@@ -6,7 +6,6 @@ import com.atlassian.confluence.spaces.Space;
 import com.atlassian.confluence.spaces.SpaceManager;
 import com.atlassian.renderer.v2.RenderMode;
 import com.atlassian.renderer.v2.macro.MacroException;
-import nl.mdlware.confluence.plugins.citation.BibliographyMacro;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -14,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static nl.mdlware.confluence.plugins.citation.FileContentAwareUnitTest.readFileAsString;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -57,6 +57,28 @@ public class BibliographyMacroTest {
     public void testExecuteForMoreThanZeroPagesContainingOneCitation() throws MacroException {
         BibliographyMacro bibliographyMacro = createBibliographyMacro(createFilledListOfPagesWithOneCitation());
         assertEquals("<h1>Bibliography</h1><a name='MID-1999'>[MID-1999]</a> Rody Middelkoop (1-1-1999). ICA. Retrieved 12-12-2000, from HAN: <a href='http://www.han.nl/ica'>http://www.han.nl/ica</a><br>", bibliographyMacro.execute(getRequiredParams(), null, null));
+    }
+
+    @Test
+    public void testExecuteForSpaceThatHasSeveralPagesWithCitations() throws MacroException {
+        BibliographyMacro bibliographyMacro = createBibliographyMacro(createLongListOfPagesWithTwoCitations());
+        assertEquals("<h1>Bibliography</h1><a name='MID-1999'>[MID-1999]</a> Rody Middelkoop (1-1-1999). ICA. Retrieved 12-12-2012, from HAN: <a href='http://www.han.nl/ica'>http://www.han.nl/ica</a><br><a name='MID-2011'>[MID-2011]</a> Rody Middelkoop (1-1-2011). DDOA. Retrieved 9-4-2012, from DDOA: <a href='http://wiki.icaprojecten.nl'>http://wiki.icaprojecten.nl</a><br>", bibliographyMacro.execute(getRequiredParams(), null, null));
+    }
+
+    private List<Page> createLongListOfPagesWithTwoCitations() {
+        List<Page> pages = createEmptyListOfPages();
+        Page page1 = createPage("Home", "bigpage-nocitations-subpages.xml");
+        pages.add(page1);
+        Page page2 = createPage("Two Citations", "two-citations.xml");
+        pages.add(page2);
+        return pages;
+    }
+
+    private Page createPage(String title, String fileName) {
+        Page page = new Page();
+        page.setTitle(title);
+        page.setBodyAsString(readFileAsString(fileName));
+        return page;
     }
 
     private List<Page> createFilledListOfPagesWithOneCitation() {

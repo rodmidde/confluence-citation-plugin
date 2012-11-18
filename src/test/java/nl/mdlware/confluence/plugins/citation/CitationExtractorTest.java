@@ -1,6 +1,6 @@
 package nl.mdlware.confluence.plugins.citation;
 
-import org.dom4j.DocumentException;
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.w3c.dom.NodeList;
 
@@ -8,9 +8,13 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 
+import static nl.mdlware.confluence.plugins.citation.FileContentAwareUnitTest.readFileAsString;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -73,7 +77,7 @@ public class CitationExtractorTest {
     @Test
     public void testInvalidPageContentsLeadToParseException() throws PageParserException {
         String inputToParse = "INVALID";
-        inputToParse = "<?xml version=\"1.0\"?><!DOCTYPE some_name [<!ENTITY nbsp \"&#160;\">]>" + inputToParse;
+        inputToParse = "<?xml version=\"1.0\"?><!DOCTYPE some_name [<!ENTITY nbsp \"&#160;\">]><p>" + inputToParse + "</p>";
         inputToParse = inputToParse.replaceAll("ac:", "");
 
         PageParser pageParser = mock(PageParser.class);
@@ -86,7 +90,7 @@ public class CitationExtractorTest {
     @Test
     public void testInvalidPageContentsLeadToXPathException() throws PageParserException, XPathExpressionException {
         String inputToParse = "INVALID";
-        inputToParse = "<?xml version=\"1.0\"?><!DOCTYPE some_name [<!ENTITY nbsp \"&#160;\">]>" + inputToParse;
+        inputToParse = "<?xml version=\"1.0\"?><!DOCTYPE some_name [<!ENTITY nbsp \"&#160;\">]><p>" + inputToParse + "</p>";
         inputToParse = inputToParse.replaceAll("ac:", "");
 
         NodeList nodeList = mock(NodeList.class);
@@ -94,11 +98,11 @@ public class CitationExtractorTest {
         when(nodeList.item(0)).thenReturn(null);
 
         PageParser pageParser = mock(PageParser.class);
-        when(pageParser.parse("<?xml version=\"1.0\"?><!DOCTYPE some_name [<!ENTITY nbsp \"&#160;\">]>INVALID")) .thenReturn(nodeList);
-                
+        when(pageParser.parse("<?xml version=\"1.0\"?><!DOCTYPE some_name [<!ENTITY nbsp \"&#160;\">]><p>INVALID</p>")).thenReturn(nodeList);
+
         XPathFactory factory = mock(XPathFactory.class);
         XPath path = mock(XPath.class);
-        when(path.evaluate("parameter",null, XPathConstants.NODESET)).thenThrow(new XPathExpressionException("Invalid Xpath Expression"));
+        when(path.evaluate("parameter", null, XPathConstants.NODESET)).thenThrow(new XPathExpressionException("Invalid Xpath Expression"));
         when(factory.newXPath()).thenReturn(path);
 
         CitationExtractor citationExtractor = new CitationExtractor("INVALID");
@@ -107,29 +111,5 @@ public class CitationExtractorTest {
 
         assertEquals(0, citationExtractor.extract().size());
     }
-    /**
-     * @see  http://snippets.dzone.com/posts/show/4480
-     *
-     * @param filePath The name of the file as it resides in your classpath
-     * @return The contents of the file as a String
-     * @throws java.io.IOException
-     */
-    private String readFileAsString(String filePath)  {
-        StringBuffer fileData = new StringBuffer(1000);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(this
-                .getClass().getClassLoader().getResourceAsStream(filePath)));
-        char[] buf = new char[1024];
-        int numRead = 0;
-        try {
-            while ((numRead = reader.read(buf)) != -1) {
-                String readData = String.valueOf(buf, 0, numRead);
-                fileData.append(readData);
-                buf = new char[1024];
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return fileData.toString();
-    }
+
 }

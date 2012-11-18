@@ -4,6 +4,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -35,13 +36,22 @@ public class PageParser {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = null;
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
+
             InputSource is = new InputSource();
             is.setCharacterStream(new StringReader(pageContents));
             Document document = documentBuilder.parse(is);
             XPathFactory xPathFactory = XPathFactory.newInstance();
             XPath xPath = xPathFactory.newXPath();
             return (NodeList)xPath.evaluate("//macro[@name='citation']", document, XPathConstants.NODESET);
-        } catch (Exception e) {
+        } catch (SAXParseException e) {
+            throw new PageParserException(e);
+        } catch (ParserConfigurationException e) {
+            throw new PageParserException(e);
+        } catch (SAXException e) {
+            throw new PageParserException(e);
+        } catch (XPathExpressionException e) {
+            throw new PageParserException(e);
+        } catch (IOException e) {
             throw new PageParserException(e);
         }
     }

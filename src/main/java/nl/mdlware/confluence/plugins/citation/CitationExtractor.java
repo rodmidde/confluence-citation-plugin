@@ -72,7 +72,7 @@ public class CitationExtractor {
 
     private String makeParseable(String pageContents) {
         if (isSet(pageContents)) {
-            String prefixedPageContents = "<?xml version=\"1.0\"?><!DOCTYPE some_name [<!ENTITY nbsp \"&#160;\">]>" + pageContents;
+            String prefixedPageContents = "<?xml version=\"1.0\"?><!DOCTYPE some_name [<!ENTITY nbsp \"&#160;\">]><p>" + pageContents + "</p>";
             return prefixedPageContents.replaceAll("ac:", "");
         }
         return pageContents;

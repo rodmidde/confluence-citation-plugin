@@ -1,0 +1,39 @@
+<h1 class="western">Research Report</h1>
+<p align="LEFT">This document serves as a place to keep track of the questions we work on during the various sprints in the project. This document will eventually be used as the base for our Research Report document.</p><ac:macro ac:name="toc-zone"><ac:parameter ac:name="class">toczone</ac:parameter><ac:rich-text-body>
+    <p><ac:macro ac:name="toc"><ac:parameter ac:name="maxLevel">2</ac:parameter><ac:parameter ac:name="class">toczone</ac:parameter><ac:parameter ac:name="exclude">Research Report</ac:parameter></ac:macro></p></ac:rich-text-body></ac:macro><ac:macro ac:name="numberedheadings"><ac:rich-text-body>
+    <h1 class="western">Introduction</h1>
+    <p><ac:macro ac:name="include"><ac:default-parameter>Introduction</ac:default-parameter></ac:macro></p>
+    <h1>Research Questions</h1>
+    <p><ac:macro ac:name="include"><ac:default-parameter>Support Questions</ac:default-parameter></ac:macro></p>
+    <h1 class="western">What is Refactoring</h1>
+    <p align="LEFT"><ac:macro ac:name="include"><ac:default-parameter>What is refactoring?</ac:default-parameter></ac:macro></p>
+    <h2>Bad smells</h2>
+    <h2>What are bad smells</h2>
+    <p><ac:macro ac:name="include"><ac:default-parameter>What are bad smells?</ac:default-parameter></ac:macro></p>
+    <h2>Types of smells</h2>
+    <p><ac:macro ac:name="include"><ac:default-parameter>What types of bad smells can be distinguished?</ac:default-parameter></ac:macro></p>
+    <h2>Most common bad smells</h2>
+    <p><ac:macro ac:name="include"><ac:default-parameter>What types of bad smells should the refactoring tool be able to improve?</ac:default-parameter></ac:macro></p>
+    <h2>Identification</h2>
+    <p><ac:macro ac:name="include"><ac:default-parameter>How do you identify bad smells?</ac:default-parameter></ac:macro></p>
+    <h1 class="western">Solving bad smells</h1>
+    <p><ac:macro ac:name="include"><ac:default-parameter>How can the refactoring tool determine how identified issues can be resolved?</ac:default-parameter></ac:macro></p>
+    <h2 class="western">Existing solutions</h2>
+    <p><ac:macro ac:name="include"><ac:default-parameter>What existing solutions are available for (automatically) refactoring source code?</ac:default-parameter></ac:macro></p>
+    <h2>Reasons to not use these existing solutions</h2>
+    <p><ac:macro ac:name="include"><ac:default-parameter>Why do existing solutions not suffice?</ac:default-parameter></ac:macro></p>
+    <h1 class="western">Developers workflow</h1>
+    <p><ac:macro ac:name="include"><ac:default-parameter>How should the refactoring be incorporated in the developer's workflow to balance effectivity and productivity?</ac:default-parameter></ac:macro></p>
+    <p align="LEFT"><ac:macro ac:name="include"><ac:default-parameter>How should proposed refactorings be presented in order for the developer to assess their desirability?</ac:default-parameter></ac:macro></p>
+    <p align="LEFT"><ac:macro ac:name="include"><ac:default-parameter>How can found solutions be applied?</ac:default-parameter></ac:macro></p>
+    <h1>Decision making</h1>
+    <p><ac:macro ac:name="include"><ac:default-parameter>How can the user give input in the decision?</ac:default-parameter></ac:macro></p>
+    <p><ac:macro ac:name="include"><ac:default-parameter>How do you find appropriate solutions for a bad smell?</ac:default-parameter></ac:macro></p>
+    <h1>Solutions</h1>
+    <p><ac:macro ac:name="include"><ac:default-parameter>solutions</ac:default-parameter></ac:macro></p>
+    <h2>Finding candidate solutions</h2>
+    <p><ac:macro ac:name="include"><ac:default-parameter>How do you find candidate solutions for an strategy?</ac:default-parameter></ac:macro></p>
+    <h2>The best candidate solution</h2>
+    <p><ac:macro ac:name="include"><ac:default-parameter>How do you find the best candidate solution?</ac:default-parameter></ac:macro></p>
+    <h1>Resources</h1>
+    <p><ac:macro ac:name="include"><ac:default-parameter>Resources</ac:default-parameter></ac:macro></p></ac:rich-text-body></ac:macro>
