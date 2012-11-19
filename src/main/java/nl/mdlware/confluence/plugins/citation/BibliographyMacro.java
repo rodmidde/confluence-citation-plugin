@@ -35,7 +35,7 @@ public class BibliographyMacro extends BaseMacro {
             throws MacroException {
         StringWriter stringWriter = createBasicStringWriter();
         List<Page> pageList = getPages(params);
-        if (pageList.size() > 0) {
+        if (!pageList.isEmpty()) {
             renderPageCitations(stringWriter, pageList);
         }
         return stringWriter.toString();
