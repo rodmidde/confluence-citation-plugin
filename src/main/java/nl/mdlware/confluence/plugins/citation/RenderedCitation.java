@@ -22,8 +22,12 @@ class RenderedCitation {
     }
 
     private String getYear() {
-        if (Validator.isSet(citation.getPublicationDate())) return split(citation.getPublicationDate());
-        if (Validator.isSet(citation.getReferenceDate())) return split(citation.getReferenceDate());
+        if (Validator.isSet(citation.getPublicationDate())) {
+            return split(citation.getPublicationDate());
+        }
+        if (Validator.isSet(citation.getReferenceDate())) {
+            return split(citation.getReferenceDate());
+        }
         return null;
     }
 
@@ -32,8 +36,12 @@ class RenderedCitation {
     }
 
     private String shorten() {
-        if (Validator.isSet(citation.getAuthor())) return shorten(citation.getAuthor());
-        if (Validator.isSet(citation.getNameOfSite())) return shorten(citation.getNameOfSite());
+        if (Validator.isSet(citation.getAuthor())) {
+            return shorten(citation.getAuthor());
+        }
+        if (Validator.isSet(citation.getNameOfSite())) {
+            return shorten(citation.getNameOfSite());
+        }
         return null;
     }
 

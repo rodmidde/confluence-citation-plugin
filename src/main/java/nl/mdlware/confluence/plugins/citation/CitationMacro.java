@@ -30,7 +30,9 @@ public class CitationMacro extends BaseMacro {
 
     private Citation createCitation(Map params) throws MacroException {
         Citation citation;
-        if (params == null || params.isEmpty()) throw new MacroException("Empty parameterlist");
+        if (params == null || params.isEmpty()) {
+            throw new MacroException("Empty parameterlist");
+        }
         try {
             citation = new CitationFactory().createCitationFromMap(params);
         } catch (IllegalArgumentException iae) {

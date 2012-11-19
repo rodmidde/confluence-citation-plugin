@@ -1,7 +1,5 @@
 package nl.mdlware.confluence.plugins.citation;
 
-import nl.mdlware.confluence.plugins.citation.Citation;
-
 import java.util.Map;
 
 /**
@@ -17,8 +15,7 @@ import java.util.Map;
  * @version Copyright (c) 2012 HAN University, All rights reserved.
  */
 class CitationFactory {
-    public Citation createCitationFromMap(Map params)
-    {
+    public Citation createCitationFromMap(Map params) {
         return new Citation(
                 getPropAsString(params, "url"),
                 getPropAsString(params, "author"),

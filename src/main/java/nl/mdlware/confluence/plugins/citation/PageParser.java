@@ -3,19 +3,13 @@ package nl.mdlware.confluence.plugins.citation;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import java.io.IOException;
 import java.io.StringReader;
-import java.util.List;
 
 /**
  * Description for the class PageParser:
@@ -42,7 +36,7 @@ public class PageParser {
             Document document = documentBuilder.parse(is);
             XPathFactory xPathFactory = XPathFactory.newInstance();
             XPath xPath = xPathFactory.newXPath();
-            return (NodeList)xPath.evaluate("//macro[@name='citation']", document, XPathConstants.NODESET);
+            return (NodeList) xPath.evaluate("//macro[@name='citation']", document, XPathConstants.NODESET);
         } catch (Exception e) {
             throw new PageParserException(e);
         }
