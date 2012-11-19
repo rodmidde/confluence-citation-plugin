@@ -43,15 +43,7 @@ public class PageParser {
             XPathFactory xPathFactory = XPathFactory.newInstance();
             XPath xPath = xPathFactory.newXPath();
             return (NodeList)xPath.evaluate("//macro[@name='citation']", document, XPathConstants.NODESET);
-        } catch (SAXParseException e) {
-            throw new PageParserException(e);
-        } catch (ParserConfigurationException e) {
-            throw new PageParserException(e);
-        } catch (SAXException e) {
-            throw new PageParserException(e);
-        } catch (XPathExpressionException e) {
-            throw new PageParserException(e);
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new PageParserException(e);
         }
     }

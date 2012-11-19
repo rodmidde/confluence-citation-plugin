@@ -10,7 +10,6 @@ import javax.xml.xpath.XPathFactory;
 import java.util.List;
 
 import static nl.mdlware.confluence.plugins.citation.FileContentAware.readFileAsString;
-import static nl.mdlware.confluence.plugins.citation.XMLDocumentWrapper.wrapIntoValidXML;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -28,6 +27,8 @@ import static org.mockito.Mockito.when;
  * @version Copyright (c) 2012 HAN University, All rights reserved.
  */
 public class CitationExtractorTest {
+    private XMLDocumentWrapper xmlDocumentWrapper = new XMLDocumentWrapper();
+
     @Test
     public void testExtractFromEmptyPage() {
         CitationExtractor citationExtractor = new CitationExtractor("");
@@ -73,7 +74,7 @@ public class CitationExtractorTest {
     @Test
     public void testInvalidPageContentsLeadToParseException() throws PageParserException {
         String inputToParse = "INVALID";
-        inputToParse = wrapIntoValidXML(inputToParse);
+        inputToParse = xmlDocumentWrapper.wrapIntoValidXML(inputToParse);
         inputToParse = inputToParse.replaceAll("ac:", "");
 
         PageParser pageParser = mock(PageParser.class);
@@ -86,7 +87,7 @@ public class CitationExtractorTest {
     @Test
     public void testInvalidPageContentsLeadToXPathException() throws PageParserException, XPathExpressionException {
         String inputToParse = "INVALID";
-        inputToParse = wrapIntoValidXML(inputToParse);
+        inputToParse = xmlDocumentWrapper.wrapIntoValidXML(inputToParse);
         inputToParse = inputToParse.replaceAll("ac:", "");
 
         NodeList nodeList = mock(NodeList.class);

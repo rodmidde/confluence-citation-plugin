@@ -15,13 +15,14 @@ import java.util.List;
 import java.util.Map;
 
 import static nl.mdlware.confluence.plugins.citation.Validator.isSet;
-import static nl.mdlware.confluence.plugins.citation.XMLDocumentWrapper.wrapIntoValidXML;
 
 /**
  * @author mdkr
  * @version Copyright (c) 2012 HAN University, All rights reserved.
  */
 public class CitationExtractor {
+    private XMLDocumentWrapper xmlDocumentWrapper = new XMLDocumentWrapper();
+
     public List<Citation> extract() {
         List<Citation> citations = new ArrayList<Citation>();
         if (isSet(pageContents)) {
@@ -65,7 +66,7 @@ public class CitationExtractor {
 
     private String makeParseable(String pageContents) {
         if (isSet(pageContents)) {
-            return wrapIntoValidXML(pageContents).replaceAll("ac:", "");
+            return xmlDocumentWrapper.wrapIntoValidXML(pageContents).replaceAll("ac:", "");
         }
         return pageContents;
     }

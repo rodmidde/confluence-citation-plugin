@@ -38,6 +38,11 @@ public class CitationMacroTest {
     }
 
     @Test(expected = MacroException.class)
+    public void testNullMap() throws MacroException {
+        macro.execute(null, null, null);
+    }
+
+    @Test(expected = MacroException.class)
     public void testIncompleteMap() throws MacroException {
         macro.execute(createIncompleteParameterMap(), null, null);
     }
