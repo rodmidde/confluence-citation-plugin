@@ -1,6 +1,5 @@
 package nl.mdlware.confluence.plugins.citation;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.w3c.dom.NodeList;
 
@@ -8,13 +7,10 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.List;
 
-import static nl.mdlware.confluence.plugins.citation.FileContentAwareUnitTest.readFileAsString;
+import static nl.mdlware.confluence.plugins.citation.FileContentAware.readFileAsString;
+import static nl.mdlware.confluence.plugins.citation.XMLDocumentWrapper.wrapIntoValidXML;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -77,7 +73,7 @@ public class CitationExtractorTest {
     @Test
     public void testInvalidPageContentsLeadToParseException() throws PageParserException {
         String inputToParse = "INVALID";
-        inputToParse = "<?xml version=\"1.0\"?><!DOCTYPE some_name [<!ENTITY nbsp \"&#160;\">]><p>" + inputToParse + "</p>";
+        inputToParse = wrapIntoValidXML(inputToParse);
         inputToParse = inputToParse.replaceAll("ac:", "");
 
         PageParser pageParser = mock(PageParser.class);
@@ -90,7 +86,7 @@ public class CitationExtractorTest {
     @Test
     public void testInvalidPageContentsLeadToXPathException() throws PageParserException, XPathExpressionException {
         String inputToParse = "INVALID";
-        inputToParse = "<?xml version=\"1.0\"?><!DOCTYPE some_name [<!ENTITY nbsp \"&#160;\">]><p>" + inputToParse + "</p>";
+        inputToParse = wrapIntoValidXML(inputToParse);
         inputToParse = inputToParse.replaceAll("ac:", "");
 
         NodeList nodeList = mock(NodeList.class);
@@ -98,7 +94,7 @@ public class CitationExtractorTest {
         when(nodeList.item(0)).thenReturn(null);
 
         PageParser pageParser = mock(PageParser.class);
-        when(pageParser.parse("<?xml version=\"1.0\"?><!DOCTYPE some_name [<!ENTITY nbsp \"&#160;\">]><p>INVALID</p>")).thenReturn(nodeList);
+        when(pageParser.parse(inputToParse)).thenReturn(nodeList);
 
         XPathFactory factory = mock(XPathFactory.class);
         XPath path = mock(XPath.class);

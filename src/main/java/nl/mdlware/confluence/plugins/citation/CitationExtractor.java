@@ -15,16 +15,9 @@ import java.util.List;
 import java.util.Map;
 
 import static nl.mdlware.confluence.plugins.citation.Validator.isSet;
+import static nl.mdlware.confluence.plugins.citation.XMLDocumentWrapper.wrapIntoValidXML;
 
 /**
- * Description for the class CitationExtractor:
- * <p/>
- * Example usage:
- * <p/>
- * <pre>
- *
- * </pre>
- *
  * @author mdkr
  * @version Copyright (c) 2012 HAN University, All rights reserved.
  */
@@ -72,8 +65,7 @@ public class CitationExtractor {
 
     private String makeParseable(String pageContents) {
         if (isSet(pageContents)) {
-            String prefixedPageContents = "<?xml version=\"1.0\"?><!DOCTYPE some_name [<!ENTITY nbsp \"&#160;\">]><p>" + pageContents + "</p>";
-            return prefixedPageContents.replaceAll("ac:", "");
+            return wrapIntoValidXML(pageContents).replaceAll("ac:", "");
         }
         return pageContents;
     }

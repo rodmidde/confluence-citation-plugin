@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class FileContentAwareUnitTest {
+public class FileContentAware {
     public static String readFileAsString(String filePath) {
         URL locationOfPageData = ClassLoader.getSystemResource(filePath);
         try {

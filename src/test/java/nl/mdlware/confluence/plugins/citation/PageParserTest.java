@@ -7,7 +7,7 @@ import org.w3c.dom.NodeList;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static nl.mdlware.confluence.plugins.citation.FileContentAwareUnitTest.readFileAsString;
+import static nl.mdlware.confluence.plugins.citation.FileContentAware.readFileAsString;
 import static org.junit.Assert.assertEquals;
 
 /**
