@@ -32,6 +32,7 @@ import static org.mockito.Mockito.when;
  */
 public class BibliographyMacroTest {
     private static final String SPACE_KEY = "ds";
+    public static final String H1_BIBLIOGRAPHY_H1 = "<h1>Bibliography</h1>";
 
     @Test
     public void testCreateBibliographyMacro() {
@@ -44,25 +45,25 @@ public class BibliographyMacroTest {
     public void testExecuteForZeroPages() throws MacroException {
         List<Page> pageList = createEmptyListOfPages();
         BibliographyMacro bibliographyMacro = createBibliographyMacro(pageList);
-        assertEquals("<h1>Bibliography</h1>", bibliographyMacro.execute(getRequiredParams(), null, null));
+        assertEquals(H1_BIBLIOGRAPHY_H1, bibliographyMacro.execute(getRequiredParams(), null, null));
     }
 
     @Test
     public void testExecuteForMoreThanZeroPagesContainingNoCitations() throws MacroException {
         BibliographyMacro bibliographyMacro = createBibliographyMacro(createFilledListOfPages());
-        assertEquals("<h1>Bibliography</h1>", bibliographyMacro.execute(getRequiredParams(), null, null));
+        assertEquals(H1_BIBLIOGRAPHY_H1, bibliographyMacro.execute(getRequiredParams(), null, null));
     }
 
     @Test
     public void testExecuteForMoreThanZeroPagesContainingOneCitation() throws MacroException {
         BibliographyMacro bibliographyMacro = createBibliographyMacro(createFilledListOfPagesWithOneCitation());
-        assertEquals("<h1>Bibliography</h1><a name='MID-1999'>[MID-1999]</a> Rody Middelkoop (1-1-1999). ICA. Retrieved 12-12-2000, from HAN: <a href='http://www.han.nl/ica'>http://www.han.nl/ica</a><br>", bibliographyMacro.execute(getRequiredParams(), null, null));
+        assertEquals(H1_BIBLIOGRAPHY_H1 + "<a name='MID-1999'>[MID-1999]</a> Rody Middelkoop (1-1-1999). ICA. Retrieved 12-12-2000, from HAN: <a href='http://www.han.nl/ica'>http://www.han.nl/ica</a><br>", bibliographyMacro.execute(getRequiredParams(), null, null));
     }
 
     @Test
     public void testExecuteForSpaceThatHasSeveralPagesWithCitations() throws MacroException {
         BibliographyMacro bibliographyMacro = createBibliographyMacro(createLongListOfPagesWithTwoCitations());
-        assertEquals("<h1>Bibliography</h1><a name='MID-1999'>[MID-1999]</a> Rody Middelkoop (1-1-1999). ICA. Retrieved 12-12-2012, from HAN: <a href='http://www.han.nl/ica'>http://www.han.nl/ica</a><br><a name='MID-2011'>[MID-2011]</a> Rody Middelkoop (1-1-2011). DDOA. Retrieved 9-4-2012, from DDOA: <a href='http://wiki.icaprojecten.nl'>http://wiki.icaprojecten.nl</a><br>", bibliographyMacro.execute(getRequiredParams(), null, null));
+        assertEquals(H1_BIBLIOGRAPHY_H1 + "<a name='MID-2010'>[MID-2010]</a> Rody Middelkoop (1-1-2010). DDOA. Retrieved 9-4-2012, from DDOA: <a href='http://wiki.icaprojecten.nl'>http://wiki.icaprojecten.nl</a><br><a name='MID-2011'>[MID-2011]</a> Rody Middelkoop (1-1-2011). ICA. Retrieved 12-12-2012, from HAN: <a href='http://www.han.nl/ica'>http://www.han.nl/ica</a><br>", bibliographyMacro.execute(getRequiredParams(), null, null));
     }
 
     private List<Page> createLongListOfPagesWithTwoCitations() {
@@ -85,14 +86,14 @@ public class BibliographyMacroTest {
         List<Page> pageList = createFilledListOfPages();
         Page page = pageList.get(0);
         page.setTitle("Home");
-        page.setBodyAsString("<ac:macro ac:name=\"citation\">\n" +
+        page.setBodyAsString("<ac:structured-macro ac:name=\"citation\">\n" +
                 "        <ac:parameter ac:name=\"referenceDate\">12-12-2000</ac:parameter>\n" +
                 "        <ac:parameter ac:name=\"nameOfPage\">ICA</ac:parameter>\n" +
                 "        <ac:parameter ac:name=\"author\">Rody Middelkoop</ac:parameter>\n" +
                 "        <ac:parameter ac:name=\"nameOfSite\">HAN</ac:parameter>\n" +
                 "        <ac:parameter ac:name=\"url\">http://www.han.nl/ica</ac:parameter>\n" +
                 "        <ac:parameter ac:name=\"publicationDate\">1-1-1999</ac:parameter>\n" +
-                "    </ac:macro>");
+                "    </ac:structured-macro>");
         return pageList;
     }
 

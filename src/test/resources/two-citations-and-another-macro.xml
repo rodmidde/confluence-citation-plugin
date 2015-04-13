@@ -1,27 +1,27 @@
 <p>In&nbsp;
-    <ac:macro ac:name="citation">
+    <ac:structured-macro ac:name="citation">
         <ac:parameter ac:name="referenceDate">12-12-2012</ac:parameter>
         <ac:parameter ac:name="nameOfPage">ICA</ac:parameter>
         <ac:parameter ac:name="author">Rody Middelkoop</ac:parameter>
         <ac:parameter ac:name="nameOfSite">HAN</ac:parameter>
         <ac:parameter ac:name="url">http://www.han.nl/ica</ac:parameter>
         <ac:parameter ac:name="publicationDate">1-1-1999</ac:parameter>
-    </ac:macro>
+    </ac:structured-macro>
     &nbsp;wordt beweerd dat de HAN een geweldige hogeschool is. In het
     <em>bijzonder</em>
     wordt gesproken over
     <strong>ICA</strong>
     en het semester DDOA&nbsp;
-    <ac:macro ac:name="citation">
+    <ac:structured-macro ac:name="citation">
         <ac:parameter ac:name="referenceDate">9-4-2012</ac:parameter>
         <ac:parameter ac:name="nameOfPage">DDOA</ac:parameter>
         <ac:parameter ac:name="author">Rody Middelkoop</ac:parameter>
         <ac:parameter ac:name="nameOfSite">DDOA</ac:parameter>
         <ac:parameter ac:name="url">http://wiki.icaprojecten.nl</ac:parameter>
         <ac:parameter ac:name="publicationDate">1-1-2011</ac:parameter>
-    </ac:macro>
-    <ac:macro ac:name="someothermacro">
+    </ac:structured-macro>
+    <ac:structured-macro ac:name="someothermacro">
         <ac:parameter ac:name="someparam">value</ac:parameter>
-    </ac:macro>
+    </ac:structured-macro>
     .
 </p>

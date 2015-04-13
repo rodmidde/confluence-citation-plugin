@@ -36,12 +36,15 @@ public class CitationExtractor {
         try {
             matchedNodes = pageParser.parse(pageContents);
             for (int i = 0; i < matchedNodes.getLength(); i++) {
-                citations.add(new CitationFactory().createCitationFromMap(createMapFromNode(matchedNodes.item(i))));
+                Map mapFromNode = createMapFromNode(matchedNodes.item(i));
+                citations.add(new CitationFactory().createCitationFromMap(mapFromNode));
             }
         } catch (PageParserException e) {
             LOG.error(e.getMessage());
+            throw new CitationExtractionException(e);
         } catch (XPathExpressionException e) {
             LOG.error(e.getMessage());
+            throw new CitationExtractionException(e);
         }
     }
 
@@ -66,7 +69,7 @@ public class CitationExtractor {
 
     private String makeParseable(String pageContents) {
         if (isSet(pageContents)) {
-            return xmlDocumentWrapper.wrapIntoValidXML(pageContents).replaceAll("ac:", "");
+            pageContents = xmlDocumentWrapper.wrapIntoValidXML(pageContents).replaceAll("ac:", "");
         }
         return pageContents;
     }

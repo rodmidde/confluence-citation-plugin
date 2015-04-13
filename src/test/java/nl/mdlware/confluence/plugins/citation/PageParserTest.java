@@ -37,14 +37,14 @@ public class PageParserTest {
 
     @Test
     public void parseFilledPage() throws PageParserException {
-        NodeList nodeList = parser.parse("<p><macro name=\"citation\">\n" +
+        NodeList nodeList = parser.parse("<p><structured-macro name=\"citation\">\n" +
                 "        <parameter name=\"referenceDate\">12-12-2012</parameter>\n" +
                 "        <parameter name=\"nameOfPage\">ICA</parameter>\n" +
                 "        <parameter name=\"author\">Rody Middelkoop</parameter>\n" +
                 "        <parameter name=\"nameOfSite\">HAN</parameter>\n" +
                 "        <parameter name=\"url\">http://www.han.nl/ica</parameter>\n" +
                 "        <parameter name=\"publicationDate\">1-1-1999</parameter>\n" +
-                "    </macro></p>");
+                "    </structured-macro></p>");
         assertEquals(1, nodeList.getLength());
     }
 

@@ -48,7 +48,7 @@ class RenderedCitation {
     private String shorten(String identifierToShorten) {
         String[] identifierToShortenParts = identifierToShorten.split(" ");
         String identifierToShortenPart = identifierToShortenParts[identifierToShortenParts.length - 1];
-        return identifierToShortenPart.substring(0, identifierToShortenPart.length() >= SHORTVAL ? SHORTVAL : identifierToShortenPart.length()).toUpperCase();
+        return identifierToShortenPart.substring(0, Math.min(identifierToShortenPart.length(), SHORTVAL)).toUpperCase();
     }
 
     private static final int SHORTVAL = 3;

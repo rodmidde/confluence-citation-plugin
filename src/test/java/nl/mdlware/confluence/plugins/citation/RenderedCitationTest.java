@@ -40,6 +40,18 @@ public class RenderedCitationTest {
     }
 
     @Test
+    public void testRenderForAuthorWithThreeLetterLastname() {
+        RenderedCitation renderedCitation = new RenderedCitation(createMockedCitationForAuthorWithThreeLetterLastname());
+        assertEquals("BOS-2000", renderedCitation.render());
+    }
+
+    @Test
+    public void testRenderForAuthorWithFourLetterLastname() {
+        RenderedCitation renderedCitation = new RenderedCitation(createMockedCitationForAuthorWithFourLetterLastname());
+        assertEquals("WOU-2000", renderedCitation.render());
+    }
+
+    @Test
     public void testRenderWithoutAuthor() {
         RenderedCitation renderedCitation = new RenderedCitation(createMockedCitationWithoutAuthor());
         assertEquals("HAN-2000", renderedCitation.render());
@@ -63,6 +75,20 @@ public class RenderedCitationTest {
     private Citation createMockedCitationForAuthorWithMissingFirstname() {
         Citation citation = mock(Citation.class);
         when(citation.getAuthor()).thenReturn("Middelkoop");
+        when(citation.getReferenceDate()).thenReturn("12-12-2000");
+        return citation;
+    }
+
+    private Citation createMockedCitationForAuthorWithThreeLetterLastname() {
+        Citation citation = mock(Citation.class);
+        when(citation.getAuthor()).thenReturn("Bos");
+        when(citation.getReferenceDate()).thenReturn("12-12-2000");
+        return citation;
+    }
+
+    private Citation createMockedCitationForAuthorWithFourLetterLastname() {
+        Citation citation = mock(Citation.class);
+        when(citation.getAuthor()).thenReturn("WOUD");
         when(citation.getReferenceDate()).thenReturn("12-12-2000");
         return citation;
     }

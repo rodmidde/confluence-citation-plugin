@@ -71,7 +71,7 @@ public class CitationExtractorTest {
         assertEquals("Rody Middelkoop", citationList.get(1).getAuthor());
     }
 
-    @Test
+    @Test(expected = CitationExtractionException.class)
     public void testInvalidPageContentsLeadToParseException() throws PageParserException {
         String inputToParse = "INVALID";
         inputToParse = xmlDocumentWrapper.wrapIntoValidXML(inputToParse);
@@ -81,10 +81,10 @@ public class CitationExtractorTest {
         when(pageParser.parse(inputToParse)).thenThrow(new PageParserException("Invalid input"));
         CitationExtractor citationExtractor = new CitationExtractor("INVALID");
         citationExtractor.setPageParser(pageParser);
-        assertEquals(0, citationExtractor.extract().size());
+        citationExtractor.extract();
     }
 
-    @Test
+    @Test(expected = CitationExtractionException.class)
     public void testInvalidPageContentsLeadToXPathException() throws PageParserException, XPathExpressionException {
         String inputToParse = "INVALID";
         inputToParse = xmlDocumentWrapper.wrapIntoValidXML(inputToParse);
@@ -106,7 +106,7 @@ public class CitationExtractorTest {
         citationExtractor.setxPathFactory(factory);
         citationExtractor.setPageParser(pageParser);
 
-        assertEquals(0, citationExtractor.extract().size());
+        citationExtractor.extract();
     }
 
 }

@@ -23,18 +23,15 @@
         </developer>
     </developers>
 
-
     <name>confluence-citation-plugin</name>
-    <description>This is the nl.mdlware.confluence.plugins.citation:confluence-citation-plugin plugin for Atlassian
-        Confluence.
-    </description>
+    <description>This is the nl.mdlware.confluence.plugins.citation:confluence-citation-plugin-c5 plugin for Atlassian Confluence.</description>
     <packaging>atlassian-plugin</packaging>
 
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.6</version>
+            <version>4.11</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -42,12 +39,6 @@
             <artifactId>confluence</artifactId>
             <version>${confluence.version}</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.atlassian.confluence.plugin</groupId>
-            <artifactId>func-test</artifactId>
-            <version>2.3</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.jwebunit</groupId>
@@ -67,6 +58,31 @@
             <version>1.8.5</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-maven</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <!-- WIRED TEST RUNNER DEPENDENCIES -->
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-osgi-testrunner</artifactId>
+            <version>${plugin.testrunner.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <version>1.1.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.2-atlassian-1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -74,7 +90,7 @@
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
                 <artifactId>maven-confluence-plugin</artifactId>
-                <version>3.2.4</version>
+                <version>${amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <productVersion>${confluence.version}</productVersion>
@@ -84,16 +100,17 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
     <properties>
-        <confluence.version>4.2</confluence.version>
-        <confluence.data.version>4.2</confluence.data.version>
+        <confluence.version>5.7.3</confluence.version>
+        <confluence.data.version>5.7.3</confluence.data.version>
+        <amps.version>5.0.13</amps.version>
+        <plugin.testrunner.version>1.2.3</plugin.testrunner.version>
     </properties>
-
 </project>

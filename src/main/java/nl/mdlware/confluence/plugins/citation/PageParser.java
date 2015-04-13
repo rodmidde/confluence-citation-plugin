@@ -36,7 +36,7 @@ public class PageParser {
             Document document = documentBuilder.parse(is);
             XPathFactory xPathFactory = XPathFactory.newInstance();
             XPath xPath = xPathFactory.newXPath();
-            return (NodeList) xPath.evaluate("//macro[@name='citation']", document, XPathConstants.NODESET);
+            return (NodeList) xPath.evaluate("//structured-macro[@name='citation']", document, XPathConstants.NODESET);
         } catch (Exception e) {
             throw new PageParserException(e);
         }
