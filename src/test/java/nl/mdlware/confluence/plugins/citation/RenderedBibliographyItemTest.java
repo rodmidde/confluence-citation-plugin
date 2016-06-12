@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 /**
@@ -22,13 +23,13 @@ public class RenderedBibliographyItemTest {
     @Test
     public void testRenderWithoutAuthor() {
         RenderedBibliographyItem item = createRenderedBibliographyItemWithoutAuthor();
-        assertEquals("Retrieved 12-12-2000, from HAN: <a href='http://www.han.nl'>http://www.han.nl</a>",item.render());
+        assertEquals("(12-12-2000). ICA. Retrieved 12-12-2000, from HAN: <a href='http://www.han.nl'>http://www.han.nl</a>",item.render());
     }
 
     @Test
     public void testRenderForAuthor() {
         RenderedBibliographyItem item = createRenderedBibliographyItemForAuthor();
-        assertEquals("Rody Middelkoop.  (12-12-1999). ICA. Retrieved 12-12-2000, from HAN: <a href='http://www.han.nl'>http://www.han.nl</a>",item.render());
+        assertEquals("Rody Middelkoop.  (12-12-2000). ICA. Retrieved 12-12-2000, from HAN: <a href='http://www.han.nl'>http://www.han.nl</a>",item.render());
     }
 
     private RenderedBibliographyItem createRenderedBibliographyItemForAuthor() {
@@ -42,24 +43,12 @@ public class RenderedBibliographyItemTest {
     }
 
     private Citation createCitationWithoutAuthor() {
-        Citation citation = mock(Citation.class);
-        when(citation.getAuthor()).thenReturn("");
-        when(citation.getUrl()).thenReturn("http://www.han.nl");
-        when(citation.getReferenceDate()).thenReturn("12-12-2000");
-        when(citation.getNameOfSite()).thenReturn("HAN");
-        return citation;
+        return new Citation("http://www.han.nl","","12-12-2000","12-12-2000","ICA","HAN","Bieb", new TestI18NResolver());
     }
     
     private Citation createCitationWithAuthor()
     {
-        Citation citation = mock(Citation.class);
-        when(citation.getAuthor()).thenReturn("Rody Middelkoop");
-        when(citation.getUrl()).thenReturn("http://www.han.nl");
-        when(citation.getReferenceDate()).thenReturn("12-12-2000");
-        when(citation.getPublicationDate()).thenReturn("12-12-1999");
-        when(citation.getNameOfSite()).thenReturn("HAN");
-        when(citation.getNameOfPage()).thenReturn("ICA");
-        return citation;
+        return new Citation("http://www.han.nl","Rody Middelkoop","12-12-2000","12-12-2000","ICA","HAN","Bieb", new TestI18NResolver());
     }
 
 

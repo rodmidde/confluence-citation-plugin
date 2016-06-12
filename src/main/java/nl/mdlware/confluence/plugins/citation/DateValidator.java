@@ -3,6 +3,9 @@ package nl.mdlware.confluence.plugins.citation;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+/**
+ * @author Rody Middelkoop
+ */
 final class DateValidator {
     private DateValidator() {
     }

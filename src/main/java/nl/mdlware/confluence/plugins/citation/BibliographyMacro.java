@@ -8,6 +8,7 @@ import com.atlassian.renderer.RenderContext;
 import com.atlassian.renderer.v2.RenderMode;
 import com.atlassian.renderer.v2.macro.BaseMacro;
 import com.atlassian.renderer.v2.macro.MacroException;
+import com.atlassian.sal.api.message.I18nResolver;
 
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -89,7 +90,14 @@ public class BibliographyMacro extends BaseMacro {
     }
 
     private List<Citation> getCitations(Page page) {
-        CitationExtractor citationExtractor = new CitationExtractor(page, pageTitle);
+        CitationExtractor citationExtractor = new CitationExtractor(page, pageTitle, i18n);
         return citationExtractor.extract();
     }
+
+    public void setI18nResolver(I18nResolver i18n) {
+        this.i18n = i18n;
+    }
+
+    private I18nResolver i18n;
+
 }

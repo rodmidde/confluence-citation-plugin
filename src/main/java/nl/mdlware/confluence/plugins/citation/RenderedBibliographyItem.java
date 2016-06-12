@@ -5,16 +5,7 @@ import java.io.StringWriter;
 import static nl.mdlware.confluence.plugins.citation.Validator.isSet;
 
 /**
- * Description for the class RenderedBibliographyItem:
- * <p/>
- * Example usage:
- * <p/>
- * <pre>
- *
- * </pre>
- *
- * @author mdkr
- * @version Copyright (c) 2012 HAN University, All rights reserved.
+ * @author Rody Middelkoop
  */
 class RenderedBibliographyItem  {
     private final Citation citation;
@@ -36,9 +27,10 @@ class RenderedBibliographyItem  {
         {
             stringWriter.append(citation.getNameOfPage()).append(". ");
         }
-        stringWriter.append("Retrieved " + citation.getReferenceDate() + ", ");
-        stringWriter.append("from " + citation.getNameOfSite() + ": ");
+        stringWriter.append(citation.getI18NText("retrieved") + " " + citation.getReferenceDate() + ", ");
+        stringWriter.append(citation.getI18NText("from") + " "  + citation.getNameOfSite() + ": ");
         stringWriter.append("<a href='" + citation.getUrl() + "'>" + citation.getUrl() + "</a>");
-        return stringWriter.toString();
+
+        return stringWriter.toString().trim();
     }
 }

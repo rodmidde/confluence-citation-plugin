@@ -1,16 +1,7 @@
 package nl.mdlware.confluence.plugins.citation;
 
 /**
- * Description for the class RenderedCitation:
- * <p/>
- * Example usage:
- * <p/>
- * <pre>
- *
- * </pre>
- *
- * @author mdkr
- * @version Copyright (c) 2012 HAN University, All rights reserved.
+ * @author Rody Middelkoop
  */
 class RenderedCitation {
     public RenderedCitation(Citation citation) {

@@ -1,6 +1,7 @@
 package nl.mdlware.confluence.plugins.citation;
 
 import com.atlassian.confluence.pages.Page;
+import com.atlassian.sal.api.message.I18nResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
@@ -19,7 +20,6 @@ import static nl.mdlware.confluence.plugins.citation.Validator.isSet;
 
 /**
  * @author mdkr
- * @version Copyright (c) 2012 HAN University, All rights reserved.
  */
 public class CitationExtractor {
     public List<Citation> extract() {
@@ -36,7 +36,7 @@ public class CitationExtractor {
             matchedNodes = pageParser.parse(pageContents);
             for (int i = 0; i < matchedNodes.getLength(); i++) {
                 Map mapFromNode = createMapFromNode(matchedNodes.item(i));
-                Citation citation = new CitationFactory().createCitationFromMap(mapFromNode);
+                Citation citation = new CitationFactory().createCitationFromMap(mapFromNode, i18n);
                 if (citation.getBibliographyPage().equals(this.pageTitle))
                     citations.add(citation);
             }
@@ -81,9 +81,10 @@ public class CitationExtractor {
         return pageContents;
     }
 
-    public CitationExtractor(Page page, String titleOfBibliographyPage) {
+    public CitationExtractor(Page page, String titleOfBibliographyPage, I18nResolver i18n) {
         this.pageContents = makeParseable(page.getBodyAsString());
         this.pageTitle = titleOfBibliographyPage;
+        this.i18n = i18n;
         setPageParser(new PageParser());
         setxPathFactory(XPathFactory.newInstance());
     }
@@ -102,6 +103,7 @@ public class CitationExtractor {
 
     private final String pageContents;
     private final String pageTitle;
+    private final I18nResolver i18n;
 
     private static final Logger LOG = LoggerFactory.getLogger(CitationMacro.class);
 }

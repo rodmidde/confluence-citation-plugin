@@ -1,5 +1,8 @@
 package nl.mdlware.confluence.plugins.citation;
 
+/**
+ * @author Rody Middelkoop
+ */
 public class XMLDocumentWrapper {
     public String wrapIntoValidXML(String pageContents) {
         return "<?xml version=\"1.0\"?><!DOCTYPE some_name [<!ENTITY nbsp \"&#160;\">" +

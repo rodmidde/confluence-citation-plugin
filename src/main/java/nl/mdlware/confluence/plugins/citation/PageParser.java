@@ -12,16 +12,7 @@ import javax.xml.xpath.XPathFactory;
 import java.io.StringReader;
 
 /**
- * Description for the class PageParser:
- * <p/>
- * Example usage:
- * <p/>
- * <pre>
- *
- * </pre>
- *
- * @author mdkr
- * @version Copyright (c) 2012 HAN University, All rights reserved.
+ * @author Rody Middelkoop
  */
 public class PageParser {
 

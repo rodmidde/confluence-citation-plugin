@@ -1,19 +1,14 @@
 package nl.mdlware.confluence.plugins.citation;
 
+import com.atlassian.sal.api.message.I18nResolver;
+
 /**
- * Description for the class Citation:
- * <p/>
- * Example usage:
- * <p/>
- * <pre>
- *
- * </pre>
- *
- * @author mdkr
- * @version Copyright (c) 2012 HAN University, All rights reserved.
+ * @author Rody Middelkoop
  */
+
 public class Citation implements Comparable<Citation> {
-    public Citation(String url, String author, String referenceDate, String publicationDate, String nameOfPage, String nameOfSite, String bibliographyPage) {
+
+    public Citation(String url, String author, String referenceDate, String publicationDate, String nameOfPage, String nameOfSite, String bibliographyPage, I18nResolver i18n) {
         this.url = url;
         this.author = author;
         this.referenceDate = referenceDate;
@@ -21,31 +16,36 @@ public class Citation implements Comparable<Citation> {
         this.nameOfPage = nameOfPage;
         this.nameOfSite = nameOfSite;
         this.bibliographyPage = bibliographyPage;
+        this.i18n = i18n;
         validate();
     }
 
     private void validate() {
         if (!Validator.isSet(url)) {
-            throw new IllegalArgumentException("Empty URL");
+            throw new IllegalArgumentException(getI18NText("emptyurl"));
         }
         if (!Validator.isSet(nameOfPage)) {
-            throw new IllegalArgumentException("Empty Pagename");
+            throw new IllegalArgumentException(getI18NText("emptypage"));
         }
         if (!Validator.isSet(nameOfSite)) {
-            throw new IllegalArgumentException("Empty Sitename");
+            throw new IllegalArgumentException(getI18NText("emptysite"));
         }
         if (!Validator.isSet(referenceDate)) {
-            throw new IllegalArgumentException("Empty Referencedate");
+            throw new IllegalArgumentException(getI18NText("emptyrefdate"));
         }
         if (!Validator.isSet(bibliographyPage)) {
-            throw new IllegalArgumentException("Empty Bibliography Page");
+            throw new IllegalArgumentException(getI18NText("emptybibpage"));
         }
         if (!DateValidator.isValidDate(referenceDate)) {
-            throw new IllegalArgumentException("Invalid Referencedate");
+            throw new IllegalArgumentException(getI18NText("invalidrefdate"));
         }
         if (this.publicationDate != null && !DateValidator.isValidDate(this.publicationDate)) {
-            throw new IllegalArgumentException("Invalid Publicationdate");
+            throw new IllegalArgumentException(getI18NText("invalidpupdate"));
         }
+    }
+
+    public String getI18NText(String propertyName) {
+        return i18n.getText("nl.mdlware.confluence.plugins.citation.confluence-citation-plugin." + propertyName);
     }
 
     public String getNameOfSite() {
@@ -82,6 +82,7 @@ public class Citation implements Comparable<Citation> {
     private final String nameOfSite;
 
     private final String bibliographyPage;
+    private I18nResolver i18n;
     private final String referenceDate;
 
     //optional

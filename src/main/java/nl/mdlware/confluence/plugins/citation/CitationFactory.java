@@ -1,21 +1,14 @@
 package nl.mdlware.confluence.plugins.citation;
 
+import com.atlassian.sal.api.message.I18nResolver;
+
 import java.util.Map;
 
 /**
- * Description for the class CitationFactory:
- * <p/>
- * Example usage:
- * <p/>
- * <pre>
- *
- * </pre>
- *
- * @author mdkr
- * @version Copyright (c) 2012 HAN University, All rights reserved.
+ * @author Rody Middelkoop
  */
 class CitationFactory {
-    public Citation createCitationFromMap(Map params) {
+    public Citation createCitationFromMap(Map params, I18nResolver i18n) {
         return new Citation(
                 getPropAsString(params, "url"),
                 getPropAsString(params, "author"),
@@ -23,7 +16,7 @@ class CitationFactory {
                 getPropAsString(params, "publicationDate"),
                 getPropAsString(params, "nameOfPage"),
                 getPropAsString(params, "nameOfSite"),
-                getPropAsString(params, "bibliographyPage"));
+                getPropAsString(params, "bibliographyPage"), i18n);
     }
 
     private String getPropAsString(Map params, String propName) {
