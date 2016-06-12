@@ -1,11 +1,11 @@
 package nl.mdlware.confluence.plugins.citation;
 
-import nl.mdlware.confluence.plugins.citation.DateValidator;
 import org.junit.Test;
 
 import java.lang.reflect.Constructor;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Description for the class DateValidatorTest:

@@ -1,6 +1,5 @@
 package nl.mdlware.confluence.plugins.citation;
 
-import nl.mdlware.confluence.plugins.citation.Validator;
 import org.junit.Test;
 
 import java.lang.reflect.Constructor;

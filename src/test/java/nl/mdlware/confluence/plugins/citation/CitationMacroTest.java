@@ -1,10 +1,7 @@
 package nl.mdlware.confluence.plugins.citation;
 
-import com.atlassian.confluence.pages.PageManager;
-import com.atlassian.confluence.spaces.SpaceManager;
 import com.atlassian.renderer.v2.RenderMode;
 import com.atlassian.renderer.v2.macro.MacroException;
-import nl.mdlware.confluence.plugins.citation.CitationMacro;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +10,6 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
 
 /**
  * Testing {@link CitationMacro}

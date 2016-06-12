@@ -1,6 +1,5 @@
 package nl.mdlware.confluence.plugins.citation;
 
-import nl.mdlware.confluence.plugins.citation.Citation;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

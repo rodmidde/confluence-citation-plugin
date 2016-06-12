@@ -1,7 +1,5 @@
 package nl.mdlware.confluence.plugins.citation;
 
-import com.atlassian.confluence.pages.PageManager;
-import com.atlassian.confluence.spaces.SpaceManager;
 import com.atlassian.renderer.RenderContext;
 import com.atlassian.renderer.v2.RenderMode;
 import com.atlassian.renderer.v2.macro.BaseMacro;
