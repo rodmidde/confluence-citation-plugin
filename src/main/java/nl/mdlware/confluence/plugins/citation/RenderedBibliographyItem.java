@@ -26,7 +26,7 @@ class RenderedBibliographyItem  {
     public String render() {
         StringWriter stringWriter = new StringWriter();
         if (isSet(citation.getAuthor())) {
-            stringWriter.append(citation.getAuthor());
+            stringWriter.append(citation.getAuthor() + ". ");
         }
         if (isSet(citation.getPublicationDate()))
         {

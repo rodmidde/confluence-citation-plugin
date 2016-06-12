@@ -2,8 +2,10 @@ package nl.mdlware.confluence.plugins.citation;
 
 import com.atlassian.confluence.pages.Page;
 import com.atlassian.confluence.pages.PageManager;
+import com.atlassian.confluence.renderer.PageContext;
 import com.atlassian.confluence.spaces.Space;
 import com.atlassian.confluence.spaces.SpaceManager;
+import com.atlassian.renderer.RenderContext;
 import com.atlassian.renderer.v2.RenderMode;
 import com.atlassian.renderer.v2.macro.MacroException;
 import org.junit.Test;
@@ -32,7 +34,7 @@ import static org.mockito.Mockito.when;
  */
 public class BibliographyMacroTest {
     private static final String SPACE_KEY = "ds";
-    public static final String H1_BIBLIOGRAPHY_H1 = "<h1>Bibliography</h1>";
+    public static final String H2_BIBLIOGRAPHY_H2 = "<h2>Bibliography</h2>";
 
     @Test
     public void testCreateBibliographyMacro() {
@@ -45,32 +47,38 @@ public class BibliographyMacroTest {
     public void testExecuteForZeroPages() throws MacroException {
         List<Page> pageList = createEmptyListOfPages();
         BibliographyMacro bibliographyMacro = createBibliographyMacro(pageList);
-        assertEquals(H1_BIBLIOGRAPHY_H1, bibliographyMacro.execute(getRequiredParams(), null, null));
+        assertEquals(H2_BIBLIOGRAPHY_H2, bibliographyMacro.execute(getRequiredParams(), null, getPageContext()));
     }
 
     @Test
     public void testExecuteForMoreThanZeroPagesContainingNoCitations() throws MacroException {
         BibliographyMacro bibliographyMacro = createBibliographyMacro(createFilledListOfPages());
-        assertEquals(H1_BIBLIOGRAPHY_H1, bibliographyMacro.execute(getRequiredParams(), null, null));
+        assertEquals(H2_BIBLIOGRAPHY_H2, bibliographyMacro.execute(getRequiredParams(), null, getPageContext()));
+    }
+
+    private PageContext getPageContext() {
+        Page page = mock(Page.class);
+        when(page.getTitle()).thenReturn("Bibliography");
+        return new PageContext(page);
     }
 
     @Test
     public void testExecuteForMoreThanZeroPagesContainingOneCitation() throws MacroException {
         BibliographyMacro bibliographyMacro = createBibliographyMacro(createFilledListOfPagesWithOneCitation());
-        assertEquals(H1_BIBLIOGRAPHY_H1 + "<a name='MID-1999'>[MID-1999]</a> Rody Middelkoop (1-1-1999). ICA. Retrieved 12-12-2000, from HAN: <a href='http://www.han.nl/ica'>http://www.han.nl/ica</a><br>", bibliographyMacro.execute(getRequiredParams(), null, null));
+        assertEquals(H2_BIBLIOGRAPHY_H2 + "<a name='MID-1999'>[MID-1999]</a> Rody Middelkoop.  (1-1-1999). ICA. Retrieved 12-12-2000, from HAN: <a href='http://www.han.nl/ica'>http://www.han.nl/ica</a><br>", bibliographyMacro.execute(getRequiredParams(), null, getPageContext()));
     }
 
     @Test
     public void testExecuteForSpaceThatHasSeveralPagesWithCitations() throws MacroException {
         BibliographyMacro bibliographyMacro = createBibliographyMacro(createLongListOfPagesWithTwoCitations());
-        assertEquals(H1_BIBLIOGRAPHY_H1 + "<a name='MID-2010'>[MID-2010]</a> Rody Middelkoop (1-1-2010). DDOA. Retrieved 9-4-2012, from DDOA: <a href='http://wiki.icaprojecten.nl'>http://wiki.icaprojecten.nl</a><br><a name='MID-2011'>[MID-2011]</a> Rody Middelkoop (1-1-2011). ICA. Retrieved 12-12-2012, from HAN: <a href='http://www.han.nl/ica'>http://www.han.nl/ica</a><br>", bibliographyMacro.execute(getRequiredParams(), null, null));
+        assertEquals(H2_BIBLIOGRAPHY_H2 + "<a name='MID-2010'>[MID-2010]</a> Rody Middelkoop.  (1-1-2010). DDOA. Retrieved 9-4-2012, from DDOA: <a href='http://wiki.icaprojecten.nl'>http://wiki.icaprojecten.nl</a><br><a name='MID-2011'>[MID-2011]</a> Rody Middelkoop.  (1-1-2011). ICA. Retrieved 12-12-2012, from HAN: <a href='http://www.han.nl/ica'>http://www.han.nl/ica</a><br>", bibliographyMacro.execute(getRequiredParams(), null, getPageContext()));
     }
 
     private List<Page> createLongListOfPagesWithTwoCitations() {
         List<Page> pages = createEmptyListOfPages();
-        Page page1 = createPage("Home", "bigpage-nocitations-subpages.xml");
+        Page page1 = createPage("Bibliography", "bigpage-nocitations-subpages.xml");
         pages.add(page1);
-        Page page2 = createPage("Two Citations", "two-citations.xml");
+        Page page2 = createPage("Bibliography", "two-citations.xml");
         pages.add(page2);
         return pages;
     }
@@ -85,7 +93,7 @@ public class BibliographyMacroTest {
     private List<Page> createFilledListOfPagesWithOneCitation() {
         List<Page> pageList = createFilledListOfPages();
         Page page = pageList.get(0);
-        page.setTitle("Home");
+        page.setTitle("Bibliography");
         page.setBodyAsString("<ac:structured-macro ac:name=\"citation\">\n" +
                 "        <ac:parameter ac:name=\"referenceDate\">12-12-2000</ac:parameter>\n" +
                 "        <ac:parameter ac:name=\"nameOfPage\">ICA</ac:parameter>\n" +
@@ -93,6 +101,7 @@ public class BibliographyMacroTest {
                 "        <ac:parameter ac:name=\"nameOfSite\">HAN</ac:parameter>\n" +
                 "        <ac:parameter ac:name=\"url\">http://www.han.nl/ica</ac:parameter>\n" +
                 "        <ac:parameter ac:name=\"publicationDate\">1-1-1999</ac:parameter>\n" +
+                "        <ac:parameter ac:name=\"bibliographyPage\"><link><ri:page ri:content-title=\"Bibliography\" /></link></ac:parameter>\n" +
                 "    </ac:structured-macro>");
         return pageList;
     }
@@ -101,7 +110,7 @@ public class BibliographyMacroTest {
     private List<Page> createFilledListOfPages() {
         List<Page> pages = createEmptyListOfPages();
         Page page = new Page();
-        page.setTitle("Away");
+        page.setTitle("Bibliography");
         pages.add(page);
         return pages;
     }
@@ -109,6 +118,8 @@ public class BibliographyMacroTest {
     private Map getRequiredParams() {
         Map params = new HashMap();
         params.put("spaceName", SPACE_KEY);
+        params.put("pageTitle", "Bibliography");
+
         return params;
     }
 

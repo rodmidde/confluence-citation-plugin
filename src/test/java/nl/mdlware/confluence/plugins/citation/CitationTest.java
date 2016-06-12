@@ -20,59 +20,69 @@ import static org.junit.Assert.assertTrue;
 public class CitationTest {
     @Test(expected = IllegalArgumentException.class)
     public void testCreateCitationWithEmptyURL() {
-        new Citation("", "author", "somedate", "somedate", "page", "site");
+        new Citation("", "author", "somedate", "somedate", "page", "site", "Bibliography");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateCitationWithNullURL() {
-        new Citation(null, "author", "somedate", "somedate", "page", "site");
+        new Citation(null, "author", "somedate", "somedate", "page", "site", "Bibliography");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateCitationWithNullReferenceDate() {
-        new Citation("url", "author", null, "", "page", "site");
+        new Citation("url", "author", null, "", "page", "site", "Bibliography");
     }
     @Test(expected = IllegalArgumentException.class)
     public void testCreateCitationWithEmptyReferenceDate() {
-        new Citation("url", "author", "", "", "page", "site");
+        new Citation("url", "author", "", "", "page", "site", "Bibliography");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateCitationWithInvalidReferenceDate() {
-        new Citation("url", "author", "1234", "", "page", "site");
+        new Citation("url", "author", "1234", "", "page", "site", "Bibliography");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateCitationWithInvalidPublicationDate() {
-        new Citation("url", "author", "1-1-2000", "1234", "page", "site");
+        new Citation("url", "author", "1-1-2000", "1234", "page", "site", "Bibliography");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateCitationWithEmptyPagename() {
-        new Citation("url", "author", "somedate", "somedate", "", "site");
+        new Citation("url", "author", "somedate", "somedate", "", "site", "Bibliography");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateCitationWithNullPagename() {
-        new Citation("url", "author", "somedate", "somedate", null, "site");
+        new Citation("url", "author", "somedate", "somedate", null, "site", "Bibliography");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateCitationWithEmptySitename() {
-        new Citation("url", "author", "somedate", "somedate", "page", "");
+        new Citation("url", "author", "somedate", "somedate", "page", "", "Bibliography");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateCitationWithNullSitename() {
-        new Citation("url", "author", "somedate", "somedate", "page", null);
+        new Citation("url", "author", "somedate", "somedate", "page", null, "Bibliography");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateCitationWithEmptyBibPage() {
+        new Citation("url", "author", "somedate", "somedate", "page", "site", "");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateCitationWithNullBibPage() {
+        new Citation("url", "author", "somedate", "somedate", "page", "site", null);
     }
 
     @Test
     public void testCompareTo()
     {
-        Citation citation = new Citation("http://www.han.nl","Rody Middelkoop", "12-12-2000", "1-1-1999", "ICA", "HAN");
-        Citation copyCitation = new Citation("http://www.han.nl","Rody Middelkoop", "12-12-2000", "1-1-1999", "ICA", "HAN");
-        Citation citationWithoutAuthor = new Citation("http://www.han.nl","", "12-12-2000", "1-1-1999", "ICA", "HAN");
+        Citation citation = new Citation("http://www.han.nl","Rody Middelkoop", "12-12-2000", "1-1-1999", "ICA", "HAN", "Bibliography");
+        Citation copyCitation = new Citation("http://www.han.nl","Rody Middelkoop", "12-12-2000", "1-1-1999", "ICA", "HAN", "Bibliography");
+        Citation citationWithoutAuthor = new Citation("http://www.han.nl","", "12-12-2000", "1-1-1999", "ICA", "HAN", "Bibliography");
         assertEquals(0, citation.compareTo(copyCitation));
         assertTrue(citationWithoutAuthor.compareTo(citation) <= -1);
 

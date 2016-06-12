@@ -2,6 +2,7 @@ package nl.mdlware.confluence.plugins.citation;
 
 import com.atlassian.confluence.pages.Page;
 import com.atlassian.confluence.pages.PageManager;
+import com.atlassian.confluence.renderer.PageContext;
 import com.atlassian.confluence.spaces.SpaceManager;
 import com.atlassian.renderer.RenderContext;
 import com.atlassian.renderer.v2.RenderMode;
@@ -24,6 +25,7 @@ public class BibliographyMacro extends BaseMacro {
 
     private final PageManager pageManager;
     private final SpaceManager spaceManager;
+    private String pageTitle;
 
     public BibliographyMacro(PageManager pageManager, SpaceManager spaceManager) {
         this.pageManager = pageManager;
@@ -40,7 +42,8 @@ public class BibliographyMacro extends BaseMacro {
 
     public String execute(Map params, String body, RenderContext renderContext)
             throws MacroException {
-        StringWriter stringWriter = createBasicStringWriter();
+        this.pageTitle = ((PageContext)renderContext).getEntity().getTitle();
+        StringWriter stringWriter = createBasicStringWriter((String) params.get("pageTitle"));
         List<Page> pageList = getPages(params);
         if (!pageList.isEmpty()) {
             renderPageCitations(stringWriter, pageList);
@@ -48,9 +51,9 @@ public class BibliographyMacro extends BaseMacro {
         return stringWriter.toString();
     }
 
-    private StringWriter createBasicStringWriter() {
+    private StringWriter createBasicStringWriter(String pageTitle) {
         StringWriter stringWriter = new StringWriter();
-        stringWriter.append("<h1>Bibliography</h1>");
+        stringWriter.append("<h2>"+ pageTitle +"</h2>");
         return stringWriter;
     }
 
@@ -86,7 +89,7 @@ public class BibliographyMacro extends BaseMacro {
     }
 
     private List<Citation> getCitations(Page page) {
-        CitationExtractor citationExtractor = new CitationExtractor(page.getBodyAsString());
+        CitationExtractor citationExtractor = new CitationExtractor(page, pageTitle);
         return citationExtractor.extract();
     }
 }

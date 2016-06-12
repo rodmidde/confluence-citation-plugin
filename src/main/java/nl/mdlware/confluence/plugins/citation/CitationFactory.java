@@ -22,7 +22,8 @@ class CitationFactory {
                 getPropAsString(params, "referenceDate"),
                 getPropAsString(params, "publicationDate"),
                 getPropAsString(params, "nameOfPage"),
-                getPropAsString(params, "nameOfSite"));
+                getPropAsString(params, "nameOfSite"),
+                getPropAsString(params, "bibliographyPage"));
     }
 
     private String getPropAsString(Map params, String propName) {

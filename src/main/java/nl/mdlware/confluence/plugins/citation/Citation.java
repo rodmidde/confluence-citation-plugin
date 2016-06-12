@@ -13,13 +13,14 @@ package nl.mdlware.confluence.plugins.citation;
  * @version Copyright (c) 2012 HAN University, All rights reserved.
  */
 public class Citation implements Comparable<Citation> {
-    public Citation(String url, String author, String referenceDate, String publicationDate, String nameOfPage, String nameOfSite) {
+    public Citation(String url, String author, String referenceDate, String publicationDate, String nameOfPage, String nameOfSite, String bibliographyPage) {
         this.url = url;
         this.author = author;
         this.referenceDate = referenceDate;
         this.publicationDate = publicationDate;
         this.nameOfPage = nameOfPage;
         this.nameOfSite = nameOfSite;
+        this.bibliographyPage = bibliographyPage;
         validate();
     }
 
@@ -35,6 +36,9 @@ public class Citation implements Comparable<Citation> {
         }
         if (!Validator.isSet(referenceDate)) {
             throw new IllegalArgumentException("Empty Referencedate");
+        }
+        if (!Validator.isSet(bibliographyPage)) {
+            throw new IllegalArgumentException("Empty Bibliography Page");
         }
         if (!DateValidator.isValidDate(referenceDate)) {
             throw new IllegalArgumentException("Invalid Referencedate");
@@ -68,10 +72,16 @@ public class Citation implements Comparable<Citation> {
         return nameOfPage;
     }
 
+    public String getBibliographyPage() {
+        return bibliographyPage;
+    }
     // required
     private final String url;
     private final String nameOfPage;
+
     private final String nameOfSite;
+
+    private final String bibliographyPage;
     private final String referenceDate;
 
     //optional

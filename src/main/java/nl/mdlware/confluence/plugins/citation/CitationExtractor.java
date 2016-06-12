@@ -1,5 +1,6 @@
 package nl.mdlware.confluence.plugins.citation;
 
+import com.atlassian.confluence.pages.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
@@ -21,23 +22,23 @@ import static nl.mdlware.confluence.plugins.citation.Validator.isSet;
  * @version Copyright (c) 2012 HAN University, All rights reserved.
  */
 public class CitationExtractor {
-    private XMLDocumentWrapper xmlDocumentWrapper = new XMLDocumentWrapper();
-
     public List<Citation> extract() {
         List<Citation> citations = new ArrayList<Citation>();
         if (isSet(pageContents)) {
-            parsePageContentsToCitations(citations);
+            parsePageContentsToCitationsForTheCurrentPage(citations);
         }
         return citations;
     }
 
-    private void parsePageContentsToCitations(List<Citation> citations) {
+    private void parsePageContentsToCitationsForTheCurrentPage(List<Citation> citations) {
         NodeList matchedNodes = null;
         try {
             matchedNodes = pageParser.parse(pageContents);
             for (int i = 0; i < matchedNodes.getLength(); i++) {
                 Map mapFromNode = createMapFromNode(matchedNodes.item(i));
-                citations.add(new CitationFactory().createCitationFromMap(mapFromNode));
+                Citation citation = new CitationFactory().createCitationFromMap(mapFromNode);
+                if (citation.getBibliographyPage().equals(this.pageTitle))
+                    citations.add(citation);
             }
         } catch (PageParserException e) {
             LOG.error(e.getMessage());
@@ -55,11 +56,17 @@ public class CitationExtractor {
         if (parameters != null) {
             for (int i = 0; i < parameters.getLength(); i++) {
                 Node item = parameters.item(i);
-                params.put(item.getAttributes().getNamedItem("name").getTextContent(), item.getTextContent());
+                params.put(getTextContent(item.getAttributes().getNamedItem("name")), getTextContent(item));
             }
             return params;
         }
         throw new XPathExpressionException("Cannot parse XPath expression");
+    }
+
+    private String getTextContent(Node item) {
+        String textContent =  item.getTextContent();
+        if (textContent != "") return textContent;
+        else return item.getFirstChild().getFirstChild().getAttributes().item(0).getTextContent();
     }
 
     private NodeList selectNodes(Node matchedNode, String parameter) throws XPathExpressionException {
@@ -74,8 +81,9 @@ public class CitationExtractor {
         return pageContents;
     }
 
-    public CitationExtractor(String pageContents) {
-        this.pageContents = makeParseable(pageContents);
+    public CitationExtractor(Page page, String titleOfBibliographyPage) {
+        this.pageContents = makeParseable(page.getBodyAsString());
+        this.pageTitle = titleOfBibliographyPage;
         setPageParser(new PageParser());
         setxPathFactory(XPathFactory.newInstance());
     }
@@ -89,8 +97,11 @@ public class CitationExtractor {
     }
 
     private PageParser pageParser;
+    private XMLDocumentWrapper xmlDocumentWrapper = new XMLDocumentWrapper();
     private XPathFactory xPathFactory;
-    private String pageContents;
+
+    private final String pageContents;
+    private final String pageTitle;
 
     private static final Logger LOG = LoggerFactory.getLogger(CitationMacro.class);
 }

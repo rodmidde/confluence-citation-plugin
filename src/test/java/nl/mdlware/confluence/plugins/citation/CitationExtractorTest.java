@@ -1,5 +1,6 @@
 package nl.mdlware.confluence.plugins.citation;
 
+import com.atlassian.confluence.pages.Page;
 import org.junit.Test;
 import org.w3c.dom.NodeList;
 
@@ -31,19 +32,29 @@ public class CitationExtractorTest {
 
     @Test
     public void testExtractFromEmptyPage() {
-        CitationExtractor citationExtractor = new CitationExtractor("");
+        Page page = mock(Page.class);
+        when(page.getBodyAsString()).thenReturn("");
+
+        CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle());
         assertEquals(0, citationExtractor.extract().size());
     }
 
     @Test
     public void testExtractFromPageWithNoCitations() {
-        CitationExtractor citationExtractor = new CitationExtractor("<p>Test</p>");
+        Page page = mock(Page.class);
+        when(page.getBodyAsString()).thenReturn("<p>Test</p>");
+
+        CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle());
         assertEquals(0, citationExtractor.extract().size());
     }
 
     @Test
     public void testExtractFromPageWithOneCitation() {
-        CitationExtractor citationExtractor = new CitationExtractor(readFileAsString("one-citation.xml"));
+        Page page = mock(Page.class);
+        when(page.getBodyAsString()).thenReturn(readFileAsString("one-citation.xml"));
+        when(page.getTitle()).thenReturn("Bibliography");
+
+        CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle());
         List<Citation> citationList = citationExtractor.extract();
         assertEquals(1, citationList.size());
         assertEquals("HAN", citationList.get(0).getNameOfSite());
@@ -53,7 +64,11 @@ public class CitationExtractorTest {
 
     @Test
     public void testExtractFromPageWithTwoCitations() {
-        CitationExtractor citationExtractor = new CitationExtractor(readFileAsString("two-citations.xml"));
+        Page page = mock(Page.class);
+        when(page.getBodyAsString()).thenReturn(readFileAsString("two-citations.xml"));
+        when(page.getTitle()).thenReturn("Bibliography");
+
+        CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle());
         List<Citation> citationList = citationExtractor.extract();
         assertEquals(2, citationList.size());
         assertEquals("DDOA", citationList.get(1).getNameOfSite());
@@ -63,7 +78,11 @@ public class CitationExtractorTest {
 
     @Test
     public void testExtractFromPageWithTwoCitationsAndAnotherMacro() {
-        CitationExtractor citationExtractor = new CitationExtractor(readFileAsString("two-citations-and-another-macro.xml"));
+        Page page = mock(Page.class);
+        when(page.getBodyAsString()).thenReturn(readFileAsString("two-citations-and-another-macro.xml"));
+        when(page.getTitle()).thenReturn("Bibliography");
+
+        CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle());
         List<Citation> citationList = citationExtractor.extract();
         assertEquals(2, citationList.size());
         assertEquals("DDOA", citationList.get(1).getNameOfSite());
@@ -79,7 +98,12 @@ public class CitationExtractorTest {
 
         PageParser pageParser = mock(PageParser.class);
         when(pageParser.parse(inputToParse)).thenThrow(new PageParserException("Invalid input"));
-        CitationExtractor citationExtractor = new CitationExtractor("INVALID");
+
+        Page page = mock(Page.class);
+        when(page.getBodyAsString()).thenReturn("INVALID");
+        when(page.getTitle()).thenReturn("Bibliography");
+
+        CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle());
         citationExtractor.setPageParser(pageParser);
         citationExtractor.extract();
     }
@@ -97,12 +121,17 @@ public class CitationExtractorTest {
         PageParser pageParser = mock(PageParser.class);
         when(pageParser.parse(inputToParse)).thenReturn(nodeList);
 
+
         XPathFactory factory = mock(XPathFactory.class);
         XPath path = mock(XPath.class);
         when(path.evaluate("parameter", null, XPathConstants.NODESET)).thenThrow(new XPathExpressionException("Invalid Xpath Expression"));
         when(factory.newXPath()).thenReturn(path);
 
-        CitationExtractor citationExtractor = new CitationExtractor("INVALID");
+        Page page = mock(Page.class);
+        when(page.getBodyAsString()).thenReturn("INVALID");
+        when(page.getTitle()).thenReturn("Bibliography");
+
+        CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle());
         citationExtractor.setxPathFactory(factory);
         citationExtractor.setPageParser(pageParser);
 

@@ -67,6 +67,7 @@ public class CitationMacroTest {
         params.put("nameOfPage", "ICA");
         params.put("nameOfSite", "HAN");
         params.put("referenceDate", "12-12-2000");
+        params.put("bibliographyPage", "Bibliography");
         return params;
     }
 

@@ -28,7 +28,7 @@ public class RenderedBibliographyItemTest {
     @Test
     public void testRenderForAuthor() {
         RenderedBibliographyItem item = createRenderedBibliographyItemForAuthor();
-        assertEquals("Rody Middelkoop (12-12-1999). ICA. Retrieved 12-12-2000, from HAN: <a href='http://www.han.nl'>http://www.han.nl</a>",item.render());
+        assertEquals("Rody Middelkoop.  (12-12-1999). ICA. Retrieved 12-12-2000, from HAN: <a href='http://www.han.nl'>http://www.han.nl</a>",item.render());
     }
 
     private RenderedBibliographyItem createRenderedBibliographyItemForAuthor() {
