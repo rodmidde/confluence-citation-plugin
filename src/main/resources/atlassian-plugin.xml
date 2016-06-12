@@ -18,6 +18,7 @@
             <parameter name="referenceDate" type="date" required="true"/>
             <parameter name="author" type="string"/>
             <parameter name="publicationDate" type="date"/>
+            <parameter name="bibliographyPage" type="confluence-content" required="true"/>
         </parameters>
         <category>reporting</category>
     </macro>
@@ -26,6 +27,7 @@
            documentation-url="https://github.com/rodmidde/confluence-citation-plugin/wiki">
         <parameters>
             <parameter name="spaceName" type="spacekey" required="true"/>
+            <parameter name="pageTitle" type="string" required="true"/>
             <category>reporting</category>
         </parameters>
     </macro>
