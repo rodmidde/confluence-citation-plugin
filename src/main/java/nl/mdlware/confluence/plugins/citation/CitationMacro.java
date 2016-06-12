@@ -12,6 +12,10 @@ import java.util.Map;
  * @author Rody Middelkoop
  */
 public class CitationMacro extends BaseMacro {
+    public CitationMacro(I18nResolver i18nResolver) {
+        this.i18nResolver = i18nResolver;
+    }
+
     public boolean hasBody() {
         return false;
     }
@@ -26,10 +30,10 @@ public class CitationMacro extends BaseMacro {
     private Citation createCitation(Map params) throws MacroException {
         Citation citation;
         if (params == null || params.isEmpty()) {
-            throw new MacroException(i18n.getText("nl.mdlware.confluence.plugins.citation.confluence-citation-plugin.emptyparameters"));
+            throw new MacroException(i18nResolver.getText("nl.mdlware.confluence.plugins.citation.confluence-citation-plugin.emptyparameters"));
         }
         try {
-            citation = new CitationFactory().createCitationFromMap(params, i18n);
+            citation = new CitationFactory().createCitationFromMap(params, i18nResolver);
         } catch (IllegalArgumentException iae) {
             throw new MacroException(iae);
         }
@@ -40,9 +44,5 @@ public class CitationMacro extends BaseMacro {
         return RenderMode.ALL;
     }
 
-    public void setI18nResolver(I18nResolver i18n) {
-        this.i18n = i18n;
-    }
-
-    private I18nResolver i18n;
+    private I18nResolver i18nResolver;
 }

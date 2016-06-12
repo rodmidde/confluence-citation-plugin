@@ -19,8 +19,7 @@ public class CitationMacroTest {
 
     @Before
     public void setUp() throws Exception {
-        macro = new CitationMacro();
-        macro.setI18nResolver(new TestI18NResolver());
+        macro = new CitationMacro(new TestI18NResolver());
     }
 
     @Test

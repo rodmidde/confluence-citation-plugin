@@ -129,8 +129,7 @@ public class BibliographyMacroTest {
         Space space = mock(Space.class);
         when(spaceManager.getSpace(SPACE_KEY)).thenReturn(space);
         when(pageManager.getPages(space, false)).thenReturn(pageList);
-        BibliographyMacro macro = new BibliographyMacro(pageManager, spaceManager);
-        macro.setI18nResolver(new TestI18NResolver());
+        BibliographyMacro macro = new BibliographyMacro(pageManager, spaceManager, new TestI18NResolver());
         return macro;
 
     }

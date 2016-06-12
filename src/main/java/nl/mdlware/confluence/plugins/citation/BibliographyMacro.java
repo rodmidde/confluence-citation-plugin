@@ -28,9 +28,10 @@ public class BibliographyMacro extends BaseMacro {
     private final SpaceManager spaceManager;
     private String pageTitle;
 
-    public BibliographyMacro(PageManager pageManager, SpaceManager spaceManager) {
+    public BibliographyMacro(PageManager pageManager, SpaceManager spaceManager, I18nResolver i18nResolver) {
         this.pageManager = pageManager;
         this.spaceManager = spaceManager;
+        this.i18nResolver = i18nResolver;
     }
 
     public boolean hasBody() {
@@ -84,20 +85,16 @@ public class BibliographyMacro extends BaseMacro {
             stringWriter.append("<a name='" + contents + "'>[");
             stringWriter.append(contents);
             stringWriter.append("]</a> ");
-            stringWriter.append(new RenderedBibliographyItem(citation).render());
+            stringWriter.append(new RenderedBibliographyItem(citation, i18nResolver).render());
             stringWriter.append("<br>");
         }
     }
 
     private List<Citation> getCitations(Page page) {
-        CitationExtractor citationExtractor = new CitationExtractor(page, pageTitle, i18n);
+        CitationExtractor citationExtractor = new CitationExtractor(page, pageTitle, i18nResolver);
         return citationExtractor.extract();
     }
 
-    public void setI18nResolver(I18nResolver i18n) {
-        this.i18n = i18n;
-    }
-
-    private I18nResolver i18n;
+    private I18nResolver i18nResolver;
 
 }

@@ -44,7 +44,7 @@ public class Citation implements Comparable<Citation> {
         }
     }
 
-    public String getI18NText(String propertyName) {
+    private String getI18NText(String propertyName) {
         return i18n.getText("nl.mdlware.confluence.plugins.citation.confluence-citation-plugin." + propertyName);
     }
 

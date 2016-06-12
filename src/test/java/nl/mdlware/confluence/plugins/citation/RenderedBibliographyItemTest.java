@@ -34,12 +34,12 @@ public class RenderedBibliographyItemTest {
 
     private RenderedBibliographyItem createRenderedBibliographyItemForAuthor() {
         Citation citation = createCitationWithAuthor();
-        return new RenderedBibliographyItem(citation);
+        return new RenderedBibliographyItem(citation, new TestI18NResolver());
     }
 
     private RenderedBibliographyItem createRenderedBibliographyItemWithoutAuthor() {
         Citation citation = createCitationWithoutAuthor();
-        return new RenderedBibliographyItem(citation);
+        return new RenderedBibliographyItem(citation, new TestI18NResolver());
     }
 
     private Citation createCitationWithoutAuthor() {
