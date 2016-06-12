@@ -24,7 +24,7 @@
     </developers>
 
     <name>confluence-citation-plugin</name>
-    <description>This is the nl.mdlware.confluence.plugins.citation:confluence-citation-plugin-c5 plugin for Atlassian Confluence.</description>
+    <description>This is Citation and Bibliography plugin for Atlassian Confluence.</description>
     <packaging>atlassian-plugin</packaging>
 
     <dependencies>
