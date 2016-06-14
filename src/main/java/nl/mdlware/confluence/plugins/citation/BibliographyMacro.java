@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  * @author Rody Middelkoop
  */
 public class BibliographyMacro extends BaseMacro {
-    private Logger logger = Logger.getLogger(getClass().getName());
+    private final static Logger LOGGER = Logger.getLogger(BibliographyMacro.class.getName());
 
     private final PageManager pageManager;
     private final SpaceManager spaceManager;
@@ -70,9 +70,9 @@ public class BibliographyMacro extends BaseMacro {
         List<Citation> citations = new ArrayList<Citation>();
         for (Page page : pageList) {
             citations.addAll(getCitations(page));
-            logger.log(Level.ALL, page.getTitle());
+            LOGGER.log(Level.ALL, page.getTitle());
         }
-        logger.log(Level.ALL, "Number of pages : " + pageList.size());
+        LOGGER.log(Level.ALL, "Number of pages : " + pageList.size());
         Collections.sort(citations);
         return citations;
     }

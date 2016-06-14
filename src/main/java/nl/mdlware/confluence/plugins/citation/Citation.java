@@ -21,23 +21,20 @@ public class Citation implements Comparable<Citation> {
     }
 
     private void validate() {
-        if (!Validator.isSet(url)) {
-            throw new IllegalArgumentException(getI18NText("emptyurl"));
-        }
-        if (!Validator.isSet(nameOfPage)) {
-            throw new IllegalArgumentException(getI18NText("emptypage"));
-        }
-        if (!Validator.isSet(nameOfSite)) {
-            throw new IllegalArgumentException(getI18NText("emptysite"));
-        }
-        if (!Validator.isSet(referenceDate)) {
-            throw new IllegalArgumentException(getI18NText("emptyrefdate"));
-        }
-        if (!Validator.isSet(bibliographyPage)) {
-            throw new IllegalArgumentException(getI18NText("emptybibpage"));
-        }
+        validate(url, "emptyurl");
+        validate(nameOfPage, "emptypage");
+        validate(nameOfSite, "emptysite");
+        validate(referenceDate, "emptyrefdate");
+        validate(bibliographyPage, "emptybibpage");
+
         if (this.publicationDate != null && !DateValidator.isValidDate(this.publicationDate)) {
             throw new IllegalArgumentException(getI18NText("invalidpubdate"));
+        }
+    }
+
+    private void validate(String field, String exceptionMessageKey) {
+        if (!Validator.isSet(field)) {
+            throw new IllegalArgumentException(getI18NText(exceptionMessageKey));
         }
     }
 

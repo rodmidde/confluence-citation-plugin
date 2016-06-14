@@ -63,7 +63,7 @@ public class CitationExtractor {
 
     private String getTextContent(Node item) {
         String textContent = item.getTextContent();
-        if (textContent != "") return textContent;
+        if (!textContent.isEmpty()) return textContent;
         else return item.getFirstChild().getFirstChild().getAttributes().item(0).getTextContent();
     }
 
