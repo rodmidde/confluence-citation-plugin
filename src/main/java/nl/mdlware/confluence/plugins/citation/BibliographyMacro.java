@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  * @author Rody Middelkoop
  */
 public class BibliographyMacro extends BaseMacro {
-    private final static Logger LOGGER = Logger.getLogger(BibliographyMacro.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(BibliographyMacro.class.getName());
 
     private final PageManager pageManager;
     private final SpaceManager spaceManager;

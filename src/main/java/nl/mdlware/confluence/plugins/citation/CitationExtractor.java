@@ -63,8 +63,10 @@ public class CitationExtractor {
 
     private String getTextContent(Node item) {
         String textContent = item.getTextContent();
-        if (!textContent.isEmpty()) return textContent;
-        else return item.getFirstChild().getFirstChild().getAttributes().item(0).getTextContent();
+        if (!textContent.isEmpty())
+            return textContent;
+        else
+            return item.getFirstChild().getFirstChild().getAttributes().item(0).getTextContent();
     }
 
     private NodeList selectNodes(Node matchedNode, String parameter) throws XPathExpressionException {
