@@ -36,11 +36,8 @@ public class Citation implements Comparable<Citation> {
         if (!Validator.isSet(bibliographyPage)) {
             throw new IllegalArgumentException(getI18NText("emptybibpage"));
         }
-        if (!DateValidator.isValidDate(referenceDate)) {
-            throw new IllegalArgumentException(getI18NText("invalidrefdate"));
-        }
         if (this.publicationDate != null && !DateValidator.isValidDate(this.publicationDate)) {
-            throw new IllegalArgumentException(getI18NText("invalidpupdate"));
+            throw new IllegalArgumentException(getI18NText("invalidpubdate"));
         }
     }
 

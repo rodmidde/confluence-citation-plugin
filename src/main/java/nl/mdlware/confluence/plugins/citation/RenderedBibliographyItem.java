@@ -25,13 +25,13 @@ class RenderedBibliographyItem  {
         }
         if (isSet(citation.getPublicationDate()))
         {
-            stringWriter.append(" (" + citation.getPublicationDate() + "). ");
+            stringWriter.append(" (" + citation.getPublicationDate().trim() + "). ");
         }
-        if (isSet(citation.getNameOfPage()))
-        {
-            stringWriter.append(citation.getNameOfPage()).append(". ");
-        }
-        stringWriter.append(getI18NText("retrieved") + " " + citation.getReferenceDate() + ", ");
+        stringWriter.append(citation.getNameOfPage().trim()).append(". ");
+        stringWriter.append(getI18NText("retrieved"));
+        stringWriter.append(" ");
+        stringWriter.append(citation.getReferenceDate());
+        stringWriter.append(", ");
         stringWriter.append(getI18NText("from") + " "  + citation.getNameOfSite() + ": ");
         stringWriter.append("<a href='" + citation.getUrl() + "'>" + citation.getUrl() + "</a>");
 

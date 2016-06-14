@@ -29,7 +29,7 @@ public class CitationMacro extends BaseMacro {
 
     private Citation createCitation(Map params) throws MacroException {
         Citation citation;
-        if (params == null || params.isEmpty()) {
+        if (params == null) {
             throw new MacroException(i18nResolver.getText("nl.mdlware.confluence.plugins.citation.confluence-citation-plugin.emptyparameters"));
         }
         try {

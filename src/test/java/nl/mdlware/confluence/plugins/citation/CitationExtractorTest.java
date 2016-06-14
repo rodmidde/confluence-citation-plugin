@@ -41,6 +41,15 @@ public class CitationExtractorTest {
     }
 
     @Test
+    public void testExtractFromPageWithNullBody() {
+        Page page = mock(Page.class);
+        when(page.getBodyAsString()).thenReturn(null);
+
+        CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle(), i18n);
+        assertEquals(0, citationExtractor.extract().size());
+    }
+
+    @Test
     public void testExtractFromPageWithNoCitations() {
         Page page = mock(Page.class);
         when(page.getBodyAsString()).thenReturn("<p>Test</p>");
@@ -89,6 +98,17 @@ public class CitationExtractorTest {
         assertEquals("DDOA", citationList.get(1).getNameOfSite());
         assertEquals("DDOA", citationList.get(1).getNameOfPage());
         assertEquals("Rody Middelkoop", citationList.get(1).getAuthor());
+    }
+
+    @Test
+    public void testExtractFromPageWithTwoCitationsAndAnotherMacroButNotEqualToCurrentBibPage() {
+        Page page = mock(Page.class);
+        when(page.getBodyAsString()).thenReturn(readFileAsString("two-citations-and-another-macro.xml"));
+        when(page.getTitle()).thenReturn("Bieb");
+
+        CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle(), i18n);
+        List<Citation> citationList = citationExtractor.extract();
+        assertEquals(0, citationList.size());
     }
 
     @Test(expected = CitationExtractionException.class)

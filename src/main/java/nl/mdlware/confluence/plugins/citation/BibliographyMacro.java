@@ -47,9 +47,7 @@ public class BibliographyMacro extends BaseMacro {
         this.pageTitle = ((PageContext)renderContext).getEntity().getTitle();
         StringWriter stringWriter = createBasicStringWriter((String) params.get("pageTitle"));
         List<Page> pageList = getPages(params);
-        if (!pageList.isEmpty()) {
-            renderPageCitations(stringWriter, pageList);
-        }
+        renderPageCitations(stringWriter, pageList);
         return stringWriter.toString();
     }
 

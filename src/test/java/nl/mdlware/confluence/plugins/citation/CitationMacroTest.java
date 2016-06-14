@@ -2,8 +2,11 @@ package nl.mdlware.confluence.plugins.citation;
 
 import com.atlassian.renderer.v2.RenderMode;
 import com.atlassian.renderer.v2.macro.MacroException;
+import org.hamcrest.CoreMatchers;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +19,9 @@ import static org.junit.Assert.assertNotNull;
  */
 public class CitationMacroTest {
     private CitationMacro macro;
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void setUp() throws Exception {
@@ -33,8 +39,10 @@ public class CitationMacroTest {
         macro.execute(createEmptyParameterMap(), null, null);
     }
 
-    @Test(expected = MacroException.class)
+    @Test
     public void testNullMap() throws MacroException {
+        thrown.expect(MacroException.class);
+        thrown.expectMessage(CoreMatchers.containsString("Empty Parameterlist"));
         macro.execute(null, null, null);
     }
 

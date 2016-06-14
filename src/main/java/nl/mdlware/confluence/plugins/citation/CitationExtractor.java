@@ -24,9 +24,7 @@ import static nl.mdlware.confluence.plugins.citation.Validator.isSet;
 public class CitationExtractor {
     public List<Citation> extract() {
         List<Citation> citations = new ArrayList<Citation>();
-        if (isSet(pageContents)) {
-            parsePageContentsToCitationsForTheCurrentPage(citations);
-        }
+        parsePageContentsToCitationsForTheCurrentPage(citations);
         return citations;
     }
 
@@ -64,7 +62,7 @@ public class CitationExtractor {
     }
 
     private String getTextContent(Node item) {
-        String textContent =  item.getTextContent();
+        String textContent = item.getTextContent();
         if (textContent != "") return textContent;
         else return item.getFirstChild().getFirstChild().getAttributes().item(0).getTextContent();
     }
@@ -75,10 +73,7 @@ public class CitationExtractor {
     }
 
     private String makeParseable(String pageContents) {
-        if (isSet(pageContents)) {
-            pageContents = xmlDocumentWrapper.wrapIntoValidXML(pageContents).replaceAll("ac:", "");
-        }
-        return pageContents;
+        return xmlDocumentWrapper.wrapIntoValidXML(pageContents).replaceAll("ac:", "");
     }
 
     public CitationExtractor(Page page, String titleOfBibliographyPage, I18nResolver i18n) {
