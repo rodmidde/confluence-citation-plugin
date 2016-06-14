@@ -1,3 +1,5 @@
+[![Build Status](http://ddoa-dev.icaprojecten.nl:8081/jenkins/buildStatus/icon?job=Confluence Citation Macro)](http://ddoa-dev.icaprojecten.nl:8081/jenkins/job/Confluence Citation Macro)
+
 Confluence Citation Plugin
 --------------------------
 This plugin adds APA-support to Confluence using 2 macro's:
