@@ -6,10 +6,17 @@ package nl.mdlware.confluence.plugins.citation;
 public class XMLDocumentWrapper {
     public String wrapIntoValidXML(String pageContents) {
         return String.format("<?xml version=\"1.0\"?><!DOCTYPE some_name [<!ENTITY nbsp \"&#160;\">" +
-                "<!ENTITY ndash   \"&#8211;\"><!ENTITY mdash   \"&#8212;\">" +
-                "<!ENTITY rsquo   \"&#8217;\"><!ENTITY lsquo   \"&#8216;\">" +
-                "<!ENTITY ldquo   \"&#8220;\">" +
-                "<!ENTITY rdquo   \"&#8221;\">" +
+                "<!ENTITY ndash    \"&#8211;\">" +
+                "<!ENTITY mdash    \"&#8212;\">" +
+                "<!ENTITY rsquo    \"&#8217;\">" +
+                "<!ENTITY lsquo    \"&#8216;\">" +
+                "<!ENTITY ldquo    \"&#8220;\">" +
+                "<!ENTITY rdquo    \"&#8221;\">" +
+                "<!ENTITY hellip   \"&#8230;\">" +
+                "<!ENTITY eacute   \"&#233;\">" +
+                "<!ENTITY iuml     \"&#239;\">" +
+                "<!ENTITY oacute   \"&#243;\">" +
+                "<!ENTITY shy      \"&#173;\">" +
                 "]><p>%s</p>", pageContents);
     }
 }
