@@ -9,6 +9,7 @@ public class XMLDocumentWrapper {
                 "<!ENTITY ndash   \"&#8211;\"><!ENTITY mdash   \"&#8212;\">" +
                 "<!ENTITY rsquo   \"&#8217;\"><!ENTITY lsquo   \"&#8216;\">" +
                 "<!ENTITY ldquo   \"&#8220;\">" +
+                "<!ENTITY rdquo   \"&#8221;\">" +
                 "]><p>%s</p>", pageContents);
     }
 }
