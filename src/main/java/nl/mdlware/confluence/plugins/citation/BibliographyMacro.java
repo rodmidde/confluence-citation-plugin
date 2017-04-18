@@ -26,7 +26,7 @@ public class BibliographyMacro extends BaseMacro {
 
     private final PageManager pageManager;
     private final SpaceManager spaceManager;
-    private String pageTitle;
+    private String pageId;
 
     public BibliographyMacro(PageManager pageManager, SpaceManager spaceManager, I18nResolver i18nResolver) {
         this.pageManager = pageManager;
@@ -44,11 +44,15 @@ public class BibliographyMacro extends BaseMacro {
 
     public String execute(Map params, String body, RenderContext renderContext)
             throws MacroException {
-        this.pageTitle = ((PageContext)renderContext).getEntity().getTitle();
-        StringWriter stringWriter = createBasicStringWriter((String) params.get("pageTitle"));
+        this.pageId = Long.toString(((PageContext)renderContext).getEntity().getId());
+        StringWriter stringWriter = createBasicStringWriter(getTitleOfPageGivenPageId((PageContext) renderContext));
         List<Page> pageList = getPages(params);
         renderPageCitations(stringWriter, pageList);
         return stringWriter.toString();
+    }
+
+    private String getTitleOfPageGivenPageId(PageContext renderContext) {
+        return pageManager.getPage(renderContext.getEntity().getId()).getTitle();
     }
 
     private StringWriter createBasicStringWriter(String pageTitle) {
@@ -89,7 +93,7 @@ public class BibliographyMacro extends BaseMacro {
     }
 
     private List<Citation> getCitations(Page page) {
-        CitationExtractor citationExtractor = new CitationExtractor(page, pageTitle, i18nResolver);
+        CitationExtractor citationExtractor = new CitationExtractor(page, pageId, i18nResolver);
         return citationExtractor.extract();
     }
 

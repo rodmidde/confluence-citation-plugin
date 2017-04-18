@@ -24,7 +24,7 @@ public class CitationMacro extends BaseMacro {
             throws MacroException {
         Citation citation = createCitation(params);
         String content = new RenderedCitation(citation).render();
-        return "<a href='" + citation.getBibliographyPage() +"#" + content + "'>[" + content + "]</a>";
+        return "<a href='viewpage.action?pageId=" + citation.getPageId() +"#" + content + "'>[" + content + "]</a>";
     }
 
     private Citation createCitation(Map params) throws MacroException {

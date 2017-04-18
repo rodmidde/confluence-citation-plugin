@@ -59,6 +59,8 @@ public class BibliographyMacroTest {
     private PageContext getPageContext() {
         Page page = mock(Page.class);
         when(page.getTitle()).thenReturn("Bibliography");
+        when(page.getId()).thenReturn(12345678L);
+
         return new PageContext(page);
     }
 
@@ -86,6 +88,7 @@ public class BibliographyMacroTest {
     private Page createPage(String title, String fileName) {
         Page page = new Page();
         page.setTitle(title);
+        page.setId(12345678L);
         page.setBodyAsString(readFileAsString(fileName));
         return page;
     }
@@ -93,6 +96,7 @@ public class BibliographyMacroTest {
     private List<Page> createFilledListOfPagesWithOneCitation() {
         List<Page> pageList = createFilledListOfPages();
         Page page = pageList.get(0);
+        page.setId(12345678L);
         page.setTitle("Bibliography");
         page.setBodyAsString("<ac:structured-macro ac:name=\"citation\">\n" +
                 "        <ac:parameter ac:name=\"referenceDate\">12-12-2000</ac:parameter>\n" +
@@ -101,7 +105,7 @@ public class BibliographyMacroTest {
                 "        <ac:parameter ac:name=\"nameOfSite\">HAN</ac:parameter>\n" +
                 "        <ac:parameter ac:name=\"url\">http://www.han.nl/ica</ac:parameter>\n" +
                 "        <ac:parameter ac:name=\"publicationDate\">1-1-1999</ac:parameter>\n" +
-                "        <ac:parameter ac:name=\"bibliographyPage\"><link><ri:page ri:content-title=\"Bibliography\" /></link></ac:parameter>\n" +
+                "        <ac:parameter ac:name=\"pageId\"><link><ri:page ri:content-title=\"12345678\" /></link></ac:parameter>\n" +
                 "    </ac:structured-macro>");
         return pageList;
     }
@@ -111,6 +115,7 @@ public class BibliographyMacroTest {
         List<Page> pages = createEmptyListOfPages();
         Page page = new Page();
         page.setTitle("Bibliography");
+        page.setId(12345678L);
         pages.add(page);
         return pages;
     }
@@ -118,7 +123,7 @@ public class BibliographyMacroTest {
     private Map getRequiredParams() {
         Map params = new HashMap();
         params.put("spaceName", SPACE_KEY);
-        params.put("pageTitle", "Bibliography");
+        params.put("pageId", "12345678");
 
         return params;
     }
@@ -129,6 +134,9 @@ public class BibliographyMacroTest {
         Space space = mock(Space.class);
         when(spaceManager.getSpace(SPACE_KEY)).thenReturn(space);
         when(pageManager.getPages(space, false)).thenReturn(pageList);
+        Page page = mock(Page.class);
+        when(page.getTitle()).thenReturn("Bibliography");
+        when(pageManager.getPage(12345678L)).thenReturn(page);
         BibliographyMacro macro = new BibliographyMacro(pageManager, spaceManager, new TestI18NResolver());
         return macro;
 

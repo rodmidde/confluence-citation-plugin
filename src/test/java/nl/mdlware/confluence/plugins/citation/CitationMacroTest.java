@@ -56,7 +56,7 @@ public class CitationMacroTest {
         Map params = createMinimalWorkingParameterMap();
         String renderedCitation = macro.execute(params, null, null);
         assertNotNull(renderedCitation);
-        assertEquals("<a href='Bibliography#HAN-2000'>[HAN-2000]</a>", renderedCitation);
+        assertEquals("<a href='viewpage.action?pageId=12345678#HAN-2000'>[HAN-2000]</a>", renderedCitation);
     }
 
     @Test
@@ -66,7 +66,7 @@ public class CitationMacroTest {
         params.put("publicationDate", "1-1-1999");
         String renderedCitation = macro.execute(params, null, null);
         assertNotNull(renderedCitation);
-        assertEquals("<a href='Bibliography#MID-1999'>[MID-1999]</a>", renderedCitation);
+        assertEquals("<a href='viewpage.action?pageId=12345678#MID-1999'>[MID-1999]</a>", renderedCitation);
     }
 
     private Map createMinimalWorkingParameterMap() {
@@ -75,7 +75,7 @@ public class CitationMacroTest {
         params.put("nameOfPage", "ICA");
         params.put("nameOfSite", "HAN");
         params.put("referenceDate", "12-12-2000");
-        params.put("bibliographyPage", "Bibliography");
+        params.put("pageId", "12345678");
         return params;
     }
 

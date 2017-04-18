@@ -6,7 +6,7 @@
         <ac:parameter ac:name="nameOfSite">HAN</ac:parameter>
         <ac:parameter ac:name="url">http://www.han.nl/ica</ac:parameter>
         <ac:parameter ac:name="publicationDate">1-1-1999</ac:parameter>
-        <ac:parameter ac:name="bibliographyPage"><link><ri:page ri:content-title="Bibliography" /></link></ac:parameter>
+        <ac:parameter ac:name="pageId"><link><ri:page ri:content-title="12345678" /></link></ac:parameter>
     </ac:structured-macro>
     &nbsp;wordt beweerd dat de HAN een geweldige hogeschool is.
 </p>

@@ -8,14 +8,14 @@ import com.atlassian.sal.api.message.I18nResolver;
 
 public class Citation implements Comparable<Citation> {
 
-    public Citation(String url, String author, String referenceDate, String publicationDate, String nameOfPage, String nameOfSite, String bibliographyPage, I18nResolver i18n) {
+    public Citation(String url, String author, String referenceDate, String publicationDate, String nameOfPage, String nameOfSite, String pageId, I18nResolver i18n) {
         this.url = url;
         this.author = author;
         this.referenceDate = referenceDate;
         this.publicationDate = publicationDate;
         this.nameOfPage = nameOfPage;
         this.nameOfSite = nameOfSite;
-        this.bibliographyPage = bibliographyPage;
+        this.pageId = pageId;
         this.i18n = i18n;
         validate();
     }
@@ -25,7 +25,7 @@ public class Citation implements Comparable<Citation> {
         validate(nameOfPage, "emptypage");
         validate(nameOfSite, "emptysite");
         validate(referenceDate, "emptyrefdate");
-        validate(bibliographyPage, "emptybibpage");
+        validate(pageId, "emptypageid");
 
         if (this.publicationDate != null && !DateValidator.isValidDate(this.publicationDate)) {
             throw new IllegalArgumentException(getI18NText("invalidpubdate"));
@@ -66,16 +66,18 @@ public class Citation implements Comparable<Citation> {
         return nameOfPage;
     }
 
-    public String getBibliographyPage() {
-        return bibliographyPage;
+
+    public String getPageId() {
+        return pageId;
     }
+
     // required
     private final String url;
     private final String nameOfPage;
 
     private final String nameOfSite;
 
-    private final String bibliographyPage;
+    private final String pageId;
     private I18nResolver i18n;
     private final String referenceDate;
 

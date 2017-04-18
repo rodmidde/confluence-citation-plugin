@@ -99,14 +99,14 @@ public class CitationTest {
     }
 
     @Test
-    public void testCreateCitationWithEmptyBibPage() {
+    public void testCreateCitationWithEmptyBibPageId() {
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage(CoreMatchers.containsString("Empty"));
         new Citation("url", "author", "somedate", "somedate", "page", "site", "", testI18NResolver);
     }
 
     @Test
-    public void testCreateCitationWithNullBibPage() {
+    public void testCreateCitationWithNullBibPageId() {
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage(CoreMatchers.containsString("Empty"));
         new Citation("url", "author", "somedate", "somedate", "page", "site", null, testI18NResolver);

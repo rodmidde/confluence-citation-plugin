@@ -36,7 +36,7 @@ public class CitationExtractorTest {
         Page page = mock(Page.class);
         when(page.getBodyAsString()).thenReturn("");
 
-        CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle(), i18n);
+        CitationExtractor citationExtractor = new CitationExtractor(page, Long.toString(page.getId()), i18n);
         assertEquals(0, citationExtractor.extract().size());
     }
 
@@ -45,7 +45,7 @@ public class CitationExtractorTest {
         Page page = mock(Page.class);
         when(page.getBodyAsString()).thenReturn(null);
 
-        CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle(), i18n);
+        CitationExtractor citationExtractor = new CitationExtractor(page, Long.toString(page.getId()), i18n);
         assertEquals(0, citationExtractor.extract().size());
     }
 
@@ -54,7 +54,7 @@ public class CitationExtractorTest {
         Page page = mock(Page.class);
         when(page.getBodyAsString()).thenReturn("<p>Test</p>");
 
-        CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle(), i18n);
+        CitationExtractor citationExtractor = new CitationExtractor(page, Long.toString(page.getId()), i18n);
         assertEquals(0, citationExtractor.extract().size());
     }
 
@@ -62,9 +62,9 @@ public class CitationExtractorTest {
     public void testExtractFromPageWithOneCitation() {
         Page page = mock(Page.class);
         when(page.getBodyAsString()).thenReturn(readFileAsString("one-citation.xml"));
-        when(page.getTitle()).thenReturn("Bibliography");
+        when(page.getId()).thenReturn(12345678L);
 
-        CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle(), i18n);
+        CitationExtractor citationExtractor = new CitationExtractor(page, Long.toString(page.getId()), i18n);
         List<Citation> citationList = citationExtractor.extract();
         assertEquals(1, citationList.size());
         assertEquals("HAN", citationList.get(0).getNameOfSite());
@@ -76,9 +76,10 @@ public class CitationExtractorTest {
     public void testExtractFromPageWithTwoCitations() {
         Page page = mock(Page.class);
         when(page.getBodyAsString()).thenReturn(readFileAsString("two-citations.xml"));
+        when(page.getId()).thenReturn(12345678L);
         when(page.getTitle()).thenReturn("Bibliography");
 
-        CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle(), i18n);
+        CitationExtractor citationExtractor = new CitationExtractor(page, Long.toString(page.getId()), i18n);
         List<Citation> citationList = citationExtractor.extract();
         assertEquals(2, citationList.size());
         assertEquals("DDOA", citationList.get(1).getNameOfSite());
@@ -91,8 +92,9 @@ public class CitationExtractorTest {
         Page page = mock(Page.class);
         when(page.getBodyAsString()).thenReturn(readFileAsString("two-citations-and-another-macro.xml"));
         when(page.getTitle()).thenReturn("Bibliography");
+        when(page.getId()).thenReturn(12345678L);
 
-        CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle(), i18n);
+        CitationExtractor citationExtractor = new CitationExtractor(page, Long.toString(page.getId()), i18n);
         List<Citation> citationList = citationExtractor.extract();
         assertEquals(2, citationList.size());
         assertEquals("DDOA", citationList.get(1).getNameOfSite());
@@ -105,8 +107,9 @@ public class CitationExtractorTest {
         Page page = mock(Page.class);
         when(page.getBodyAsString()).thenReturn(readFileAsString("two-citations-and-another-macro.xml"));
         when(page.getTitle()).thenReturn("Bieb");
+        when(page.getId()).thenReturn(12345679L);
 
-        CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle(), i18n);
+        CitationExtractor citationExtractor = new CitationExtractor(page, Long.toString(page.getId()), i18n);
         List<Citation> citationList = citationExtractor.extract();
         assertEquals(0, citationList.size());
     }
@@ -123,6 +126,7 @@ public class CitationExtractorTest {
         Page page = mock(Page.class);
         when(page.getBodyAsString()).thenReturn("INVALID");
         when(page.getTitle()).thenReturn("Bibliography");
+        when(page.getId()).thenReturn(12345678L);
 
         CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle(), i18n);
         citationExtractor.setPageParser(pageParser);
@@ -151,6 +155,8 @@ public class CitationExtractorTest {
         Page page = mock(Page.class);
         when(page.getBodyAsString()).thenReturn("INVALID");
         when(page.getTitle()).thenReturn("Bibliography");
+        when(page.getId()).thenReturn(12345678L);
+
 
         CitationExtractor citationExtractor = new CitationExtractor(page, page.getTitle(), i18n);
         citationExtractor.setxPathFactory(factory);
