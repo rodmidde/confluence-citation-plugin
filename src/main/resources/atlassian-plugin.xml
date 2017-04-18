@@ -18,7 +18,7 @@
             <parameter name="referenceDate" type="date" required="true"/>
             <parameter name="author" type="string"/>
             <parameter name="publicationDate" type="date"/>
-            <parameter name="bibliographyPage" type="confluence-content" required="true"/>
+            <parameter name="pageId" type="string" required="true"/>
         </parameters>
         <category>reporting</category>
     </macro>
